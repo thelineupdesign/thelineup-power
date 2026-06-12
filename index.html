@@ -12,11 +12,11 @@
 
     :root {
       --bg: #0A0A08;
-      --surface: #131311;
-      --surface-2: #1A1A17;
-      --border: #222220;
+      --surface: #161614;
+      --surface-2: #1E1E1B;
+      --border: #2E2E2B;
       --text: #EDEAE2;
-      --muted: #5A5752;
+      --muted: #9A9690;
       --accent: #C8A84B;
     }
 
@@ -43,16 +43,24 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
+      gap: 16px;
     }
 
     .logo {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(22px, 5vw, 30px);
+      font-size: clamp(20px, 4.5vw, 28px);
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--text);
       text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
     }
 
     .header-tag {
@@ -60,6 +68,34 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .lang-btn {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 2px 0;
+      background: none;
+      border: none;
+      font-family: 'Manrope', sans-serif;
+      transition: color 0.2s;
+    }
+
+    .lang-btn.active {
+      color: var(--text);
+    }
+
+    .lang-sep {
+      font-size: 10px;
+      color: #3A3A37;
     }
 
     /* ─── HERO ─── */
@@ -78,6 +114,7 @@
       width: 32px;
       height: 1px;
       background: var(--accent);
+      flex-shrink: 0;
     }
 
     .hero-eyebrow-text {
@@ -90,7 +127,7 @@
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
-      font-size: clamp(42px, 10vw, 72px);
+      font-size: clamp(44px, 10vw, 74px);
       line-height: 1.04;
       letter-spacing: -0.02em;
       color: var(--text);
@@ -111,22 +148,20 @@
 
     /* ─── DIVIDER ─── */
     .divider {
-      margin: 72px 0 0;
+      margin: 72px 0;
       height: 1px;
       background: var(--border);
     }
 
     /* ─── CASES ─── */
-    .cases {
-      padding: 56px 0 0;
-    }
+    .cases { }
 
     .section-label {
       font-size: 10px;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     /* ─── TAG ─── */
@@ -134,30 +169,30 @@
       display: inline-block;
       font-size: 10px;
       letter-spacing: 0.1em;
-      padding: 3px 10px;
+      padding: 4px 11px;
       border-radius: 20px;
       margin-bottom: 12px;
       font-family: 'Manrope', sans-serif;
       font-weight: 400;
     }
 
-    .tag-indigo   { background: #1A1A36; color: #9090D8; }
-    .tag-burgundy { background: #280C0D; color: #C8A030; }
-    .tag-amber    { background: #221800; color: #B88A30; }
-    .tag-purple   { background: #1A1228; color: #9878C8; }
+    .tag-indigo   { background: #22224A; color: #AAAAE0; }
+    .tag-burgundy { background: #38100F; color: #D4AF37; }
+    .tag-amber    { background: #2E2200; color: #D4A030; }
+    .tag-purple   { background: #241838; color: #B090E0; }
 
     /* ─── CARD ─── */
     .card {
-      border: 1px solid var(--border);
+      border: 1px solid #323230;
       border-radius: 4px;
       margin-bottom: 10px;
       overflow: hidden;
-      background: var(--surface);
+      background: #181816;
       cursor: pointer;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
     }
 
-    .card:hover { border-color: #333330; }
+    .card:hover { border-color: #484844; background: #1C1C1A; }
     .card:last-child { margin-bottom: 0; }
 
     .card-head {
@@ -187,7 +222,7 @@
     .card-chevron {
       flex-shrink: 0;
       margin-top: 6px;
-      color: var(--muted);
+      color: #686460;
       transition: transform 0.25s ease;
     }
 
@@ -196,7 +231,7 @@
     /* ─── CARD BODY ─── */
     .card-body {
       display: none;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid #2A2A27;
       padding: 24px 28px 28px;
       background: var(--surface-2);
     }
@@ -220,7 +255,7 @@
       flex-shrink: 0;
       margin-top: 2px;
       color: var(--accent);
-      opacity: 0.6;
+      opacity: 0.7;
     }
 
     .check-text {
@@ -238,22 +273,15 @@
       text-transform: uppercase;
       color: var(--text);
       text-decoration: none;
-      opacity: 0.35;
+      opacity: 0.45;
       transition: opacity 0.2s;
     }
 
-    .card-link:hover { opacity: 0.7; }
+    .card-link:hover { opacity: 0.8; }
 
     /* ─── CONTACTS ─── */
     .contacts {
-      padding: 88px 0 96px;
-    }
-
-    .contacts-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
+      padding: 88px 0 72px;
     }
 
     .contacts-title {
@@ -287,7 +315,7 @@
       background: var(--surface);
     }
 
-    .contact-btn:hover { border-color: #444440; }
+    .contact-btn:hover { border-color: #484844; }
     .contact-btn:active { opacity: 0.6; }
     .contact-btn-wa { color: #7DC896; }
     .contact-btn-tg { color: #6DB4E0; }
@@ -295,7 +323,7 @@
     /* ─── FOOTER ─── */
     .footer {
       border-top: 1px solid var(--border);
-      padding: 24px 0;
+      padding: 24px 0 40px;
     }
 
     .footer-inner {
@@ -304,18 +332,19 @@
       justify-content: space-between;
     }
 
-    .footer-copy {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
+    .footer-copy { font-size: 11px; color: #5A5752; letter-spacing: 0.06em; }
+    .footer-domain { font-size: 11px; color: #5A5752; letter-spacing: 0.06em; }
 
-    .footer-made {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-      opacity: 0.5;
-    }
+    /* ─── i18n ─── */
+    [data-en] { }
+    body.en [data-ru] { display: none; }
+    body.en [data-en] { display: block; }
+    body:not(.en) [data-en] { display: none; }
+    body:not(.en) [data-ru] { display: block; }
+
+    span[data-en], span[data-ru] { display: inline; }
+    body.en span[data-ru] { display: none; }
+    body:not(.en) span[data-en] { display: none; }
   </style>
 </head>
 <body>
@@ -325,7 +354,17 @@
     <!-- HEADER -->
     <header class="header">
       <a href="#" class="logo">The Lineup</a>
-      <span class="header-tag">Бали, 2026</span>
+      <div class="header-right">
+        <span class="header-tag">
+          <span data-ru>Бали, 2026</span>
+          <span data-en>Bali, 2026</span>
+        </span>
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('ru')" id="btn-ru">RU</button>
+          <span class="lang-sep">/</span>
+          <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+        </div>
+      </div>
     </header>
 
     <!-- HERO -->
@@ -334,46 +373,56 @@
         <div class="hero-line"></div>
         <span class="hero-eyebrow-text">Portfolio</span>
       </div>
-      <h1 class="hero-title">Digital<br>interfaces<br>&amp; <em>sales</em><br>architecture</h1>
-      <p class="hero-sub">Разработка автономных цифровых интерфейсов и архитектуры продаж для бизнеса с амбициями.</p>
+      <h1 class="hero-title">
+        <span data-ru>Цифровые<br>интерфейсы<br>и <em>архитектура</em><br>продаж</span>
+        <span data-en>Digital<br>interfaces<br>&amp; <em>sales</em><br>architecture</span>
+      </h1>
+      <p class="hero-sub">
+        <span data-ru>Разработка автономных цифровых интерфейсов и архитектуры продаж для бизнеса с амбициями.</span>
+        <span data-en>Building autonomous digital interfaces and sales architecture for ambitious businesses.</span>
+      </p>
     </section>
 
     <div class="divider"></div>
 
     <!-- CASES -->
     <section class="cases">
-      <div class="section-label">Кейсы</div>
+      <div class="section-label">
+        <span data-ru>Кейсы</span>
+        <span data-en>Cases</span>
+      </div>
 
       <div class="card" onclick="toggle(this)">
         <div class="card-head">
           <div>
             <span class="tag tag-indigo">Wellness · EU</span>
             <div class="card-name">Екатерина Донна</div>
-            <div class="card-desc">E-commerce интерфейс для европейского рынка</div>
+            <div class="card-desc">
+              <span data-ru>E-commerce интерфейс для европейского рынка</span>
+              <span data-en>E-commerce interface for the European market</span>
+            </div>
           </div>
           <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
         <div class="card-body">
           <div class="check-list">
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Двуязычный сайт RU/FR с аудиоплеером</span>
+              <span class="check-text"><span data-ru>Двуязычный сайт RU/FR с аудиоплеером</span><span data-en>Bilingual RU/FR site with audio player</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Stripe + Supabase, токенизированный доступ</span>
+              <span class="check-text"><span data-ru>Stripe + Supabase, токенизированный доступ</span><span data-en>Stripe + Supabase, tokenized access</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Продуктовая матрица, воронка через Resend</span>
+              <span class="check-text"><span data-ru>Продуктовая матрица, воронка через Resend</span><span data-en>Product matrix, sales funnel via Resend</span></span>
             </div>
           </div>
           <a href="https://ekaterina-donnat.com" class="card-link">
-            Открыть сайт
+            <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -382,33 +431,34 @@
       <div class="card" onclick="toggle(this)">
         <div class="card-head">
           <div>
-            <span class="tag tag-burgundy">B2B · Москва</span>
+            <span class="tag tag-burgundy">B2B · Moscow</span>
             <div class="card-name">ЭПАС</div>
-            <div class="card-desc">Цифровая инфраструктура крупной реставрационной компании</div>
+            <div class="card-desc">
+              <span data-ru>Цифровая инфраструктура крупной реставрационной компании</span>
+              <span data-en>Digital infrastructure for a major restoration company</span>
+            </div>
           </div>
           <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
         <div class="card-body">
           <div class="check-list">
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Сайт-портфолио с базой 110 объектов</span>
+              <span class="check-text"><span data-ru>Сайт-портфолио с базой 110 объектов</span><span data-en>Portfolio site with 110-object database</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Управление DNS, CDN через Cloudflare R2</span>
+              <span class="check-text"><span data-ru>Управление DNS, CDN через Cloudflare R2</span><span data-en>DNS management, CDN via Cloudflare R2</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Две презентации PPTX, документация проектов</span>
+              <span class="check-text"><span data-ru>Две презентации PPTX, документация проектов</span><span data-en>Two PPTX decks, full project documentation</span></span>
             </div>
           </div>
           <a href="https://studio-epas.ru" class="card-link">
-            Открыть сайт
+            <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -419,31 +469,32 @@
           <div>
             <span class="tag tag-amber">Sales Tech</span>
             <div class="card-name">Audio Laguna</div>
-            <div class="card-desc">Экосистема микроприложений и автоматизация воронок продаж</div>
+            <div class="card-desc">
+              <span data-ru>Экосистема микроприложений и автоматизация воронок продаж</span>
+              <span data-en>Micro-app ecosystem and automated sales funnels</span>
+            </div>
           </div>
           <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
         <div class="card-body">
           <div class="check-list">
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Автономные воронки для RU и EN рынков</span>
+              <span class="check-text"><span data-ru>Автономные воронки для RU и EN рынков</span><span data-en>Autonomous funnels for RU and EN markets</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">B2B коллаборации, пассивный доход с продаж</span>
+              <span class="check-text"><span data-ru>B2B коллаборации, пассивный доход с продаж</span><span data-en>B2B collaborations, passive revenue from sales</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Аудит-приложение, SVG-визуализация по 9 слоям</span>
+              <span class="check-text"><span data-ru>Аудит-приложение, SVG-визуализация по 9 слоям</span><span data-en>Audit app, SVG visualization across 9 layers</span></span>
             </div>
           </div>
           <a href="#" class="card-link">
-            Открыть проект
+            <span data-ru>Открыть проект</span><span data-en>View project</span>
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -454,31 +505,32 @@
           <div>
             <span class="tag tag-purple">Wellness · Bali</span>
             <div class="card-name">Illume</div>
-            <div class="card-desc">Коммерческий прототип для ретритов и аудиомедитаций</div>
+            <div class="card-desc">
+              <span data-ru>Коммерческий прототип для ретритов и аудиомедитаций</span>
+              <span data-en>Commercial prototype for retreats and audio meditations</span>
+            </div>
           </div>
           <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
         </div>
         <div class="card-body">
           <div class="check-list">
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">MVP на Tilda с кастомным Tailwind</span>
+              <span class="check-text"><span data-ru>MVP на Tilda с кастомным Tailwind</span><span data-en>MVP on Tilda with custom Tailwind</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Упаковка саунд-хилинга в цифровой продукт</span>
+              <span class="check-text"><span data-ru>Упаковка саунд-хилинга в цифровой продукт</span><span data-en>Sound healing packaged as a digital product</span></span>
             </div>
             <div class="check-item">
               <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text">Бренд-система, аудитория 35+, без эзотерики</span>
+              <span class="check-text"><span data-ru>Бренд-система, аудитория 35+, без эзотерики</span><span data-en>Brand system, 35+ audience, no esoteric fluff</span></span>
             </div>
           </div>
           <a href="https://i11ume.com" class="card-link">
-            Открыть проект
+            <span data-ru>Открыть проект</span><span data-en>View project</span>
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -488,17 +540,22 @@
 
     <!-- CONTACTS -->
     <section class="contacts" id="contact">
-      <div class="contacts-eyebrow">
+      <div class="hero-eyebrow" style="margin-bottom: 24px;">
         <div class="hero-line"></div>
-        <span class="hero-eyebrow-text">Контакт</span>
+        <span class="hero-eyebrow-text">
+          <span data-ru>Контакт</span><span data-en>Contact</span>
+        </span>
       </div>
-      <h2 class="contacts-title">Обсудим<br>ваш проект</h2>
+      <h2 class="contacts-title">
+        <span data-ru>Обсудим<br>ваш проект</span>
+        <span data-en>Let's discuss<br>your project</span>
+      </h2>
       <div class="contact-links">
         <a href="https://wa.me/6287761350307" class="contact-btn contact-btn-wa">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp
         </a>
-        <a href="https://t.me/6287761350307" class="contact-btn contact-btn-tg">
+        <a href="https://t.me/+6287761350307" class="contact-btn contact-btn-tg">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           Telegram
         </a>
@@ -509,7 +566,7 @@
     <footer class="footer">
       <div class="footer-inner">
         <span class="footer-copy">© 2026 The Lineup</span>
-        <span class="footer-made">thelineup.design</span>
+        <span class="footer-domain">thelineup.design</span>
       </div>
     </footer>
 
@@ -522,6 +579,12 @@
       var isOpen = body.classList.contains('open');
       body.classList.toggle('open', !isOpen);
       chevron.classList.toggle('open', !isOpen);
+    }
+
+    function setLang(lang) {
+      document.body.classList.toggle('en', lang === 'en');
+      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     }
   </script>
 
