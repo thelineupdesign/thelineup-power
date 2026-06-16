@@ -264,6 +264,13 @@
       color: var(--muted);
     }
 
+    .card-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
     .card-link {
       display: inline-flex;
       align-items: center;
@@ -278,6 +285,13 @@
     }
 
     .card-link:hover { opacity: 0.8; }
+
+    .card-link-case {
+      opacity: 0.7;
+      color: var(--accent);
+    }
+
+    .card-link-case:hover { opacity: 1; }
 
     /* ─── CONTACTS ─── */
     .contacts {
@@ -421,10 +435,16 @@
               <span class="check-text"><span data-ru>Продуктовая матрица, воронка через Resend</span><span data-en>Product matrix, sales funnel via Resend</span></span>
             </div>
           </div>
-          <a href="https://ekaterina-donnat.com" class="card-link">
-            <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="card-links">
+            <a href="/donna-case.html" class="card-link card-link-case" onclick="event.stopPropagation()">
+              <span data-ru>Разбор кейса</span><span data-en>Case study</span>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h8M6 2l3.5 3.5L6 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://ekaterina-donnat.com" class="card-link" onclick="event.stopPropagation()" target="_blank">
+              <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -457,10 +477,12 @@
               <span class="check-text"><span data-ru>Две презентации PPTX, документация проектов</span><span data-en>Two PPTX decks, full project documentation</span></span>
             </div>
           </div>
-          <a href="https://studio-epas.ru" class="card-link">
-            <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="card-links">
+            <a href="https://studio-epas.ru" class="card-link" onclick="event.stopPropagation()" target="_blank">
+              <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -493,10 +515,12 @@
               <span class="check-text"><span data-ru>Аудит-приложение, SVG-визуализация по 9 слоям</span><span data-en>Audit app, SVG visualization across 9 layers</span></span>
             </div>
           </div>
-          <a href="#" class="card-link">
-            <span data-ru>Открыть проект</span><span data-en>View project</span>
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="card-links">
+            <a href="#" class="card-link" onclick="event.stopPropagation()">
+              <span data-ru>Открыть проект</span><span data-en>View project</span>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -529,10 +553,12 @@
               <span class="check-text"><span data-ru>Бренд-система, аудитория 35+, без эзотерики</span><span data-en>Brand system, 35+ audience, no esoteric fluff</span></span>
             </div>
           </div>
-          <a href="https://i11ume.com" class="card-link">
-            <span data-ru>Открыть проект</span><span data-en>View project</span>
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="card-links">
+            <a href="https://i11ume.com" class="card-link" onclick="event.stopPropagation()" target="_blank">
+              <span data-ru>Открыть проект</span><span data-en>View project</span>
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
       </div>
 
