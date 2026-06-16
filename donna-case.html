@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekaterina Donnat — The Lineup</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A0A08;
+  --text:#EDEAE2;
+  --gold:#C8A84B;
+  --muted:#9A9690;
+  --border:#2E2E2B;
+  --tag-bg:#1A1A36;
+  --tag-text:#9090D8;
+  --surface:#111110;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-weight:300;line-height:1.7;font-size:15px}
+
+.page{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+
+.back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;text-decoration:none;letter-spacing:0.04em;margin-bottom:56px;transition:color 0.2s}
+.back:hover{color:var(--text)}
+.back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}
+
+.tag{display:inline-block;background:var(--tag-bg);color:var(--tag-text);font-family:'Manrope',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:2px;margin-bottom:24px}
+
+.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,7vw,62px);line-height:1.08;letter-spacing:-0.01em;margin-bottom:20px}
+.hero-sub{color:var(--muted);font-size:14px;font-weight:300;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:40px}
+
+.meta{display:flex;gap:32px;flex-wrap:wrap;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:64px}
+.meta-item{display:flex;flex-direction:column;gap:4px}
+.meta-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.meta-val{font-size:14px;color:var(--text)}
+.meta-link{color:var(--gold);text-decoration:none;font-size:14px}
+.meta-link:hover{text-decoration:underline}
+
+.section{margin-bottom:64px}
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:32px;line-height:1.2;margin-bottom:20px}
+.prose{color:#C8C5BC;font-size:15px;font-weight:300;line-height:1.75}
+
+.stack-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:6px 14px;font-size:12px;font-weight:400;letter-spacing:0.04em;color:var(--muted)}
+.chip.hi{border-color:#2E2E1A;color:var(--gold);background:#111108}
+
+.funnel-section{margin-bottom:64px}
+.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+@media(max-width:560px){.funnel-grid{grid-template-columns:1fr}}
+.funnel-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:20px}
+.funnel-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.funnel-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;color:var(--text);margin-bottom:14px}
+.funnel-steps{display:flex;flex-direction:column;gap:0}
+.funnel-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.funnel-step:last-child{border-bottom:none}
+.funnel-arrow{color:var(--gold);font-size:11px;margin-top:3px;flex-shrink:0;opacity:0.6}
+.funnel-text{font-size:13px;color:#9A9690;font-weight:300;line-height:1.5}
+
+.arch-block{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:560px){.arch-block{grid-template-columns:1fr}}
+.arch-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px}
+.arch-card-title{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.arch-list{list-style:none;display:flex;flex-direction:column;gap:5px}
+.arch-list li{font-size:13px;color:#C8C5BC;font-weight:300;padding-left:14px;position:relative}
+.arch-list li::before{content:'–';position:absolute;left:0;color:var(--gold);opacity:0.5}
+
+.highlight-card{background:var(--surface);border:1px solid #2E2E1A;border-left:2px solid var(--gold);border-radius:4px;padding:24px;margin-top:24px}
+.highlight-card-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;margin-bottom:10px}
+.highlight-card-text{font-size:13px;color:var(--muted);line-height:1.7}
+
+.matrix{margin-top:24px;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.matrix-row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+.matrix-row:last-child{border-bottom:none}
+.matrix-row.header{background:var(--surface)}
+.matrix-label{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.matrix-name{font-size:14px;color:var(--text);font-weight:300}
+.matrix-price{font-size:14px;color:var(--gold);font-weight:400;text-align:right;white-space:nowrap;padding-left:16px}
+.matrix-price.pending{color:var(--muted);font-size:12px}
+
+.contract-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:28px;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:480px){.contract-card{grid-template-columns:1fr}}
+.contract-item{display:flex;flex-direction:column;gap:4px}
+.contract-key{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.contract-val{font-size:15px;color:var(--text);font-weight:300}
+.contract-val.gold{color:var(--gold)}
+
+.live-link{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:2px;padding:14px 24px;text-decoration:none;color:var(--text);font-size:14px;font-weight:400;letter-spacing:0.04em;transition:border-color 0.2s,color 0.2s;margin-top:24px}
+.live-link:hover{border-color:var(--gold);color:var(--gold)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#4CAF7D;flex-shrink:0}
+
+.divider{border:none;border-top:1px solid var(--border);margin:64px 0}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a class="back" href="/">
+    <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+    The Lineup
+  </a>
+
+  <div class="tag">Wellness · EU</div>
+
+  <h1 class="hero-title">Ekaterina<br>Donnat</h1>
+  <p class="hero-sub">E-commerce экосистема · Аудиомедитации · Европейский рынок</p>
+
+  <div class="meta">
+    <div class="meta-item">
+      <span class="meta-label">Домен</span>
+      <a class="meta-link" href="https://ekaterina-donnat.com" target="_blank">ekaterina-donnat.com</a>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Рынок</span>
+      <span class="meta-val">RU · FR · EU</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Стек</span>
+      <span class="meta-val">Tilda · Netlify · Supabase · Stripe · R2</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Статус</span>
+      <span class="meta-val" style="color:#4CAF7D">В работе</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-eyebrow">Задача</p>
+    <h2 class="section-title">Цифровая упаковка практики гипнотерапевта</h2>
+    <p class="prose">Екатерина Донна — швейцарский гипнотерапевт с аудиторией в России и Франции. Продукт: авторские аудиомедитации, структурированные в прогрессивную программу из 4 ступеней. Задача — выстроить полный цикл продаж без менеджера: от рекламного ролика до закрытого плеера с токенизированным доступом.</p>
+    <p class="prose" style="margin-top:12px">Не лендинг, а работающая коммерческая система. Четыре независимых воронки трафика, продуктовая матрица от 25€ до 650€, аналитический дашборд и автоматические email-цепочки через Resend.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="funnel-section">
+    <p class="section-eyebrow">Архитектура продаж</p>
+    <h2 class="section-title">Четыре независимых пути</h2>
+    <p class="prose">Каждый источник трафика имеет свою точку входа, свою механику прогрева и свой путь к покупке. Нет универсального маршрута — есть точечная работа с каждым сегментом.</p>
+
+    <div class="funnel-grid">
+      <div class="funnel-card">
+        <div class="funnel-label">Путь 01</div>
+        <div class="funnel-title">Instagram / Facebook</div>
+        <div class="funnel-steps">
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Рилс → demo.html?utm_source=instagram</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Демо-трек 21 мин, перемотка заблокирована</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">FB Pixel Lead на 3-й минуте</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Кнопка покупки разблокируется на 90%</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe → токен по email → закрытый плеер</span></div>
+        </div>
+      </div>
+
+      <div class="funnel-card">
+        <div class="funnel-label">Путь 02</div>
+        <div class="funnel-title">Сарафан</div>
+        <div class="funnel-steps">
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Ссылка в мессенджере ?utm_source=referral</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Плашка «Тебе это прислал близкий человек»</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Тот же демо-плеер с Mood Engine</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe → токен → index.html</span></div>
+        </div>
+      </div>
+
+      <div class="funnel-card">
+        <div class="funnel-label">Путь 03</div>
+        <div class="funnel-title">Органика / Pinterest</div>
+        <div class="funnel-steps">
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Pinterest / SEO → ekaterina-donnat.com</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Форма «Время выдохнуть»</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Email с демо-треком через Resend</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Гостевой токен → плеер → апсейл</span></div>
+        </div>
+      </div>
+
+      <div class="funnel-card">
+        <div class="funnel-label">Путь 04</div>
+        <div class="funnel-title">Прямая покупка</div>
+        <div class="funnel-steps">
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Органика → ekaterina-donnat.com</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Аккордеон с продуктами</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe Payment Link</span></div>
+          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Токен по email → закрытый плеер</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-eyebrow">Технический стек</p>
+    <h2 class="section-title">Инфраструктура</h2>
+    <p class="prose">Три домена с разными задачами. Серверные функции на Netlify без выделенного бэкенда. Supabase как операционная база с RLS-изоляцией чувствительных таблиц.</p>
+
+    <div class="arch-block">
+      <div class="arch-card">
+        <div class="arch-card-title">Хостинг и доставка</div>
+        <ul class="arch-list">
+          <li>Tilda — основной сайт RU/FR</li>
+          <li>Netlify Functions — 11 серверных функций</li>
+          <li>Cloudflare R2 — аудиофайлы CDN</li>
+          <li>GitHub CI/CD — автодеплой</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-title">Данные и платежи</div>
+        <ul class="arch-list">
+          <li>Supabase — 5 таблиц, RLS на 2</li>
+          <li>Stripe — вебхук + Payment Links</li>
+          <li>Resend — транзакционные письма</li>
+          <li>FB Pixel — трекинг воронки</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-title">Безопасность</div>
+        <ul class="arch-list">
+          <li>Токенизированный доступ к плееру</li>
+          <li>HMAC-аутентификация дашборда</li>
+          <li>CORS только на рабочих доменах</li>
+          <li>Секреты только в env variables</li>
+        </ul>
+      </div>
+      <div class="arch-card">
+        <div class="arch-card-title">Контент</div>
+        <ul class="arch-list">
+          <li>12 треков ступени 1 в R2</li>
+          <li>3 демо-трека, 5 дневников PDF</li>
+          <li>RU/FR интерфейс плеера</li>
+          <li>Прогресс прослушивания в Supabase</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stack-grid">
+      <span class="chip hi">Netlify Functions</span>
+      <span class="chip hi">Supabase</span>
+      <span class="chip hi">Stripe</span>
+      <span class="chip hi">Cloudflare R2</span>
+      <span class="chip">Tilda</span>
+      <span class="chip">Resend</span>
+      <span class="chip">FB Pixel</span>
+      <span class="chip">Manrope + Fraunces</span>
+      <span class="chip">RLS PostgreSQL</span>
+      <span class="chip">HMAC tokens</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-eyebrow">Нестандартное решение</p>
+    <h2 class="section-title">Mood Engine</h2>
+    <p class="prose">Клиентский модуль, который читает время суток и скорость соединения пользователя — и незаметно адаптирует атмосферу демо-плеера. Ночью с медленным интернетом сфера пульсирует медленнее, частиц меньше. Утром с быстрым соединением — плеер оживает.</p>
+
+    <div class="highlight-card">
+      <div class="highlight-card-title">Пять состояний окружения</div>
+      <div class="highlight-card-text" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin-top:12px">
+        <span style="color:#EDEAE2">Ночь + медленный интернет</span><span>Минимум частиц · очень медленный пульс</span>
+        <span style="color:#EDEAE2">Ночь + быстрый интернет</span><span>Редкие частицы · медленный пульс</span>
+        <span style="color:#EDEAE2">Утро + быстрый интернет</span><span>Средне · оживлённый пульс</span>
+        <span style="color:#EDEAE2">День</span><span>Стандарт · стандарт</span>
+        <span style="color:#EDEAE2">Вечер</span><span>Тихо · медленный пульс</span>
+      </div>
+      <p style="font-size:12px;color:#9A9690;margin-top:14px">Агрегированные данные профиля пишутся в Supabase. Персональных данных нет.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-eyebrow">Монетизация</p>
+    <h2 class="section-title">Продуктовая матрица</h2>
+    <p class="prose">Ценовой диапазон 25€–650€ закрывает разные точки входа. Ступени 2–4 на предзаказе — формируют список ожидания. Отдельная скрытая ссылка для выпускников.</p>
+
+    <div class="matrix">
+      <div class="matrix-row header">
+        <span class="matrix-label">Продукт</span>
+        <span class="matrix-label">Цена</span>
+      </div>
+      <div class="matrix-row"><span class="matrix-name">Чек-ап сессия 30 мин</span><span class="matrix-price">25€</span></div>
+      <div class="matrix-row"><span class="matrix-name">Комбо трек + чек-ап</span><span class="matrix-price">55€</span></div>
+      <div class="matrix-row"><span class="matrix-name">Ступень 1 + чек-ап (4 практики + дневник)</span><span class="matrix-price">150€</span></div>
+      <div class="matrix-row"><span class="matrix-name">Ступень 1 + разбор 2 часа</span><span class="matrix-price">310€</span></div>
+      <div class="matrix-row"><span class="matrix-name">Ступень 1 + цикл 3 сессий</span><span class="matrix-price">650€</span></div>
+      <div class="matrix-row"><span class="matrix-name" style="color:#9A9690">Ступени 2–4 (предзаказ)</span><span class="matrix-price pending">сбор email</span></div>
+      <div class="matrix-row"><span class="matrix-name" style="color:#9A9690">Ступень 2 для выпускников (скрытая)</span><span class="matrix-price pending">125€</span></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <p class="section-eyebrow">Модель сотрудничества</p>
+    <h2 class="section-title">Гибридный контракт</h2>
+
+    <div class="contract-card">
+      <div class="contract-item">
+        <span class="contract-key">Формат</span>
+        <span class="contract-val">Гибрид · 6 месяцев</span>
+      </div>
+      <div class="contract-item">
+        <span class="contract-key">Первые 2 месяца</span>
+        <span class="contract-val">Техподдержка бесплатно</span>
+      </div>
+      <div class="contract-item">
+        <span class="contract-key">С 3-го месяца</span>
+        <span class="contract-val gold">120€ / мес</span>
+      </div>
+      <div class="contract-item">
+        <span class="contract-key">Цифровые продажи</span>
+        <span class="contract-val gold">12%</span>
+      </div>
+      <div class="contract-item">
+        <span class="contract-key">Комбо-продукты</span>
+        <span class="contract-val gold">8%</span>
+      </div>
+      <div class="contract-item">
+        <span class="contract-key">Личные сессии</span>
+        <span class="contract-val">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <a class="live-link" href="https://ekaterina-donnat.com" target="_blank">
+    <span class="live-dot"></span>
+    ekaterina-donnat.com
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 9.5L9.5 2.5M5 2.5h4.5v4.5"/></svg>
+  </a>
+
+</div>
+</body>
+</html>
