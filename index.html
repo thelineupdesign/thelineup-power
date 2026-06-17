@@ -6,18 +6,20 @@
   <title>The Lineup — цифровые интерфейсы и архитектура продаж</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0A0A08;
-      --surface: #161614;
-      --surface-2: #1E1E1B;
-      --border: #2E2E2B;
-      --text: #EDEAE2;
-      --muted: #9A9690;
-      --accent: #C8A84B;
+      --bg:        #E8DDD0;
+      --surface:   #DDD4C4;
+      --surface-2: #D5CBBA;
+      --text:      #1A1814;
+      --muted:     #8C7B6E;
+      --faint:     #A89888;
+      --border:    rgba(30,36,32,0.18);
+      --umbra:     #2C1F14;
+      --graphite:  #1E2420;
     }
 
     html { scroll-behavior: smooth; }
@@ -28,347 +30,375 @@
       font-family: 'Manrope', sans-serif;
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── ТЕГИ ─── */
+    .tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; padding: 4px 11px; border-radius: 20px; font-family: 'Manrope', sans-serif; font-weight: 400; }
+    .tag-eu      { background: rgba(61,79,66,0.10);   color: #3D4F42; border: 1px solid rgba(61,79,66,0.22); }
+    .tag-moscow  { background: rgba(107,48,40,0.10);  color: #6B3028; border: 1px solid rgba(107,48,40,0.22); }
+    .tag-sales   { background: rgba(92,74,30,0.10);   color: #5C4A1E; border: 1px solid rgba(92,74,30,0.22); }
+    .tag-bali    { background: rgba(74,61,92,0.10);   color: #4A3D5C; border: 1px solid rgba(74,61,92,0.22); }
+
+    /* ─── HERO ─── */
+    .hero-root {
+      position: relative;
+      background: var(--bg);
+      overflow: hidden;
       min-height: 100vh;
     }
 
-    .wrap {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 28px;
+    .hero-light {
+      position: absolute; top: -120px; right: -80px;
+      width: 560px; height: 560px; border-radius: 50%;
+      background: radial-gradient(ellipse at 40% 40%, rgba(255,248,235,0.55) 0%, rgba(232,215,190,0.18) 45%, transparent 70%);
+      pointer-events: none;
+      animation: lightDrift 9s ease-in-out infinite;
+      will-change: transform;
+    }
+    .hero-light-2 {
+      position: absolute; bottom: 60px; left: -60px;
+      width: 320px; height: 320px; border-radius: 50%;
+      background: radial-gradient(ellipse at 60% 50%, rgba(255,248,235,0.28) 0%, transparent 65%);
+      pointer-events: none;
+      animation: lightDrift2 13s ease-in-out infinite;
+      will-change: transform;
+    }
+    @keyframes lightDrift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(-30px,40px) scale(1.06); }
+      66%      { transform: translate(20px,-25px) scale(0.96); }
+    }
+    @keyframes lightDrift2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%     { transform: translate(40px,-30px) scale(1.1); }
     }
 
-    /* ─── HEADER ─── */
-    .header {
+    .hero-grain {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      animation: grainShift 0.5s steps(1) infinite;
+    }
+    @keyframes grainShift {
+      0%   { background-position: 0 0; }
+      20%  { background-position: -40px 20px; }
+      40%  { background-position: 20px -35px; }
+      60%  { background-position: -15px 40px; }
+      80%  { background-position: 35px 10px; }
+      100% { background-position: 0 0; }
+    }
+
+    .hero-wrap {
+      position: relative; z-index: 2;
+      max-width: 680px; margin: 0 auto; padding: 0 28px;
+    }
+
+    .hero-header {
       padding: 48px 0 0;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
+      display: flex; align-items: baseline; justify-content: space-between;
     }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(20px, 4.5vw, 28px);
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-      flex-shrink: 0;
+    .hero-logo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 26px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--text); text-decoration: none;
+      opacity: 0; animation: fadeUp 1s ease 0.1s forwards;
     }
-
-    .header-right {
-      display: flex;
-      align-items: baseline;
-      gap: 20px;
+    .hero-header-right {
+      display: flex; align-items: baseline; gap: 20px;
+      opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
     }
-
-    .header-tag {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .lang-switch {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-    }
-
+    .header-tag { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .lang-switch { display: flex; gap: 4px; align-items: center; }
     .lang-btn {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      padding: 2px 0;
-      background: none;
-      border: none;
-      font-family: 'Manrope', sans-serif;
-      transition: color 0.2s;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); background: none; border: none; cursor: pointer;
+      font-family: 'Manrope', sans-serif; padding: 2px 0; transition: color 0.2s;
+    }
+    .lang-btn.active { color: var(--text); }
+    .lang-sep { font-size: 10px; color: #C4B8AC; }
+
+    .hero-horizon {
+      margin-top: 72px; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(44,31,20,0.2) 20%, rgba(44,31,20,0.35) 60%, transparent 100%);
+      opacity: 0; animation: fadeIn 1.4s ease 0.5s forwards;
     }
 
-    .lang-btn.active {
-      color: var(--text);
-    }
-
-    .lang-sep {
-      font-size: 10px;
-      color: #3A3A37;
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      padding: 80px 0 0;
-    }
+    .hero-section { padding: 56px 0 0; }
 
     .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
+      display: flex; align-items: center; gap: 12px; margin-bottom: 40px;
+      opacity: 0; animation: fadeIn 1s ease 0.7s forwards;
     }
-
-    .hero-line {
-      width: 32px;
-      height: 1px;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .hero-eyebrow-text {
-      font-size: 10px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
+    .hero-eyebrow-line { width: 32px; height: 1px; background: var(--umbra); flex-shrink: 0; }
+    .hero-eyebrow-text { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--umbra); }
 
     .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(44px, 10vw, 74px);
-      line-height: 1.04;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 32px;
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      line-height: 1.04; letter-spacing: -0.02em; color: var(--text);
+      margin-bottom: 40px;
     }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
+    .hero-title .line-sm {
+      display: block; font-size: clamp(28px,5.5vw,42px);
+      color: var(--muted); font-weight: 300; letter-spacing: -0.01em;
+      opacity: 0; animation: fadeIn 1s ease 0.9s forwards;
+    }
+    .hero-title .line-lg {
+      display: block; font-size: clamp(58px,13vw,96px); line-height: 0.96;
+      opacity: 0; animation: fadeIn 1s ease 1.0s forwards;
+    }
+    .hero-title .line-em {
+      display: block; font-size: clamp(50px,11vw,82px);
+      font-style: italic; color: var(--umbra); line-height: 1.0;
+      opacity: 0; animation: fadeIn 1s ease 1.1s forwards;
+    }
+    .hero-title .line-action {
+      display: block; font-size: clamp(32px,6vw,52px); letter-spacing: 0.04em;
+      color: var(--muted);
+      opacity: 0; animation: fadeIn 1s ease 1.25s forwards;
     }
 
     .hero-sub {
-      font-size: clamp(13px, 2vw, 15px);
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 420px;
+      font-size: 14px; line-height: 1.9; color: var(--muted); max-width: 360px; font-weight: 300;
+      opacity: 0; animation: fadeIn 1s ease 1.4s forwards;
     }
 
-    /* ─── DIVIDER ─── */
-    .divider {
-      margin: 72px 0;
-      height: 1px;
-      background: var(--border);
+    .hero-wave-wrap {
+      margin: 72px 0 0;
+      opacity: 0; animation: fadeIn 1.2s ease 1.55s forwards;
+    }
+    .hero-wave-svg { width: 100%; overflow: visible; display: block; }
+
+    .hero-bottom {
+      padding: 48px 0 64px;
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+      opacity: 0; animation: fadeIn 1s ease 1.75s forwards;
+    }
+    .scroll-hint { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+    .scroll-text { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint); }
+    .scroll-line {
+      width: 1px; height: 36px; background: var(--umbra); opacity: 0.3;
+      transform-origin: top;
+      animation: scrollPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { transform: scaleY(1); opacity: 0.3; }
+      50%      { transform: scaleY(0.35); opacity: 0.6; }
     }
 
-    /* ─── CASES ─── */
-    .cases { }
-
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 20px;
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 28px; background: var(--umbra); color: var(--bg);
+      border: none; border-radius: 3px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+      font-family: 'Manrope', sans-serif; cursor: pointer; text-decoration: none;
+      transition: transform 0.6s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
     }
+    .hero-cta:hover { transform: scale(1.03) translateY(-1px); background: #3D2B1A; }
+    .hero-cta:active { transform: scale(0.98); transition: transform 0.08s ease; }
+    .cta-arrow { transition: transform 0.6s cubic-bezier(0.23,1,0.32,1); }
+    .hero-cta:hover .cta-arrow { transform: translateX(4px); }
 
-    /* ─── TAG ─── */
-    .tag {
-      display: inline-block;
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      padding: 4px 11px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 400;
+    /* ─── CASES SECTION ─── */
+    .cases-section { padding: 0 0 96px; }
+
+    .cases-head {
+      max-width: 680px; margin: 0 auto; padding: 0 28px 28px;
     }
+    .section-label { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .section-hint { font-size: 12px; color: var(--faint); display: flex; align-items: center; gap: 8px; }
 
-    .tag-indigo   { background: #22224A; color: #AAAAE0; }
-    .tag-burgundy { background: #38100F; color: #D4AF37; }
-    .tag-amber    { background: #2E2200; color: #D4A030; }
-    .tag-purple   { background: #241838; color: #B090E0; }
+    .track-outer {
+      overflow-x: auto; overflow-y: visible;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 28px 32px;
+    }
+    .track-outer::-webkit-scrollbar { display: none; }
+    .track-outer:active { cursor: grabbing; }
 
-    /* ─── CARD ─── */
-    .card {
-      border: 1px solid #323230;
-      border-radius: 4px;
-      margin-bottom: 10px;
-      overflow: hidden;
-      background: #181816;
+    .track { display: flex; gap: 12px; width: max-content; }
+
+    .case-card {
+      width: 300px; flex-shrink: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 24px 24px;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease;
+      user-select: none;
     }
+    .case-card:hover { transform: translateY(-3px); border-color: rgba(44,31,20,0.32); }
 
-    .card:hover { border-color: #484844; background: #1C1C1A; }
-    .card:last-child { margin-bottom: 0; }
-
-    .card-head {
-      padding: 24px 28px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-    }
+    .case-card .tag { margin-bottom: 20px; }
 
     .card-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(26px, 5vw, 34px);
-      letter-spacing: -0.01em;
-      color: var(--text);
-      margin-bottom: 6px;
-      line-height: 1.1;
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 36px; letter-spacing: -0.01em; color: var(--text);
+      line-height: 1.0; margin-bottom: 12px;
+    }
+    .card-desc { font-size: 13px; line-height: 1.65; color: var(--muted); margin-bottom: 32px; min-height: 42px; }
+    .card-foot { display: flex; align-items: center; justify-content: space-between; }
+    .card-cta {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--umbra); opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+    .case-card:hover .card-cta { opacity: 0.9; }
+    .card-arrow {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(44,31,20,0.2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; color: var(--umbra);
+      transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), border-color 0.3s ease;
+    }
+    .case-card:hover .card-arrow { transform: translateX(3px); border-color: rgba(44,31,20,0.45); }
+
+    .track-fade {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 72px;
+      background: linear-gradient(90deg, transparent, var(--bg));
+      pointer-events: none;
     }
 
-    .card-desc {
-      font-size: 13px;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    .card-chevron {
-      flex-shrink: 0;
-      margin-top: 6px;
-      color: #686460;
-      transition: transform 0.25s ease;
-    }
-
-    .card-chevron.open { transform: rotate(180deg); }
-
-    /* ─── CARD BODY ─── */
-    .card-body {
-      display: none;
-      border-top: 1px solid #2A2A27;
-      padding: 24px 28px 28px;
-      background: var(--surface-2);
-    }
-
-    .card-body.open { display: block; }
-
-    .check-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .check-icon {
-      flex-shrink: 0;
-      margin-top: 2px;
-      color: var(--accent);
-      opacity: 0.7;
-    }
-
-    .check-text {
-      font-size: 13px;
-      line-height: 1.65;
-      color: var(--muted);
-    }
-
-    .card-links {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-      opacity: 0.45;
-      transition: opacity 0.2s;
-    }
-
-    .card-link:hover { opacity: 0.8; }
-
-    .card-link-case {
-      opacity: 0.7;
-      color: var(--accent);
-    }
-
-    .card-link-case:hover { opacity: 1; }
+    /* card-in анимация */
+    .card-in { opacity: 0; transform: translateY(10px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .card-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in { opacity: 0; transition: opacity 0.8s ease; }
+    .fade-in.visible { opacity: 1; }
 
     /* ─── CONTACTS ─── */
-    .contacts {
-      padding: 88px 0 72px;
-    }
+    .contacts { padding: 24px 0 72px; }
+    .contacts-wrap { max-width: 680px; margin: 0 auto; padding: 0 28px; }
+
+    .contacts-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .contacts-eyebrow-line { width: 32px; height: 1px; background: var(--umbra); flex-shrink: 0; }
+    .contacts-eyebrow-text { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--umbra); }
 
     .contacts-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: clamp(38px, 8vw, 58px);
-      letter-spacing: -0.02em;
-      line-height: 1.08;
-      margin-bottom: 40px;
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(38px,8vw,56px); letter-spacing: -0.02em; line-height: 1.08;
+      margin-bottom: 40px; color: var(--text);
     }
-
-    .contact-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
+    .contact-btns { display: flex; gap: 12px; flex-wrap: wrap; }
     .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      display: inline-flex; align-items: center; gap: 10px;
       padding: 14px 24px;
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      text-decoration: none;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      transition: border-color 0.2s, opacity 0.2s;
-      background: var(--surface);
+      border: 1px solid rgba(30,36,32,0.25); border-radius: 3px;
+      text-decoration: none; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      background: transparent; color: var(--text);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.5s cubic-bezier(0.23,1,0.32,1);
     }
-
-    .contact-btn:hover { border-color: #484844; }
-    .contact-btn:active { opacity: 0.6; }
-    .contact-btn-wa { color: #7DC896; }
-    .contact-btn-tg { color: #6DB4E0; }
+    .contact-btn:hover {
+      background: rgba(44,31,20,0.06);
+      border-color: rgba(44,31,20,0.4);
+      transform: translateY(-1px);
+    }
+    .contact-btn:active { transform: scale(0.98); transition: transform 0.08s ease; }
 
     /* ─── FOOTER ─── */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 0 40px;
-    }
+    .footer { border-top: 1px solid rgba(30,36,32,0.15); padding: 24px 0 40px; }
+    .footer-inner { max-width: 680px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-copy, .footer-domain { font-size: 11px; color: var(--faint); letter-spacing: 0.06em; }
 
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ─── CASE OVERLAY ─── */
+    .overlay {
+      position: fixed; inset: 0; z-index: 200;
+      display: flex; pointer-events: none;
     }
+    .overlay-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(26,24,20,0);
+      transition: background 0.5s ease;
+    }
+    .overlay-panel {
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: min(680px, 100%);
+      background: var(--bg);
+      transform: translateX(100%);
+      transition: transform 0.65s cubic-bezier(0.23,1,0.32,1);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .overlay.open { pointer-events: all; }
+    .overlay.open .overlay-backdrop { background: rgba(26,24,20,0.5); }
+    .overlay.open .overlay-panel { transform: translateX(0); }
 
-    .footer-copy { font-size: 11px; color: #5A5752; letter-spacing: 0.06em; }
-    .footer-domain { font-size: 11px; color: #5A5752; letter-spacing: 0.06em; }
+    .overlay-inner { padding: 48px 36px 80px; max-width: 560px; }
+
+    .overlay-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer; background: none; border: none;
+      font-family: 'Manrope', sans-serif; margin-bottom: 48px;
+      transition: color 0.2s ease;
+    }
+    .overlay-back:hover { color: var(--text); }
+
+    .overlay-tag { margin-bottom: 20px; display: block; }
+    .overlay-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(42px,8vw,64px); line-height: 1.04; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .overlay-sub { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; }
+    .overlay-divider { height: 1px; background: rgba(30,36,32,0.15); margin: 36px 0; }
+    .overlay-eyebrow { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--umbra); margin-bottom: 12px; }
+    .overlay-section-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: 26px; color: var(--text); margin-bottom: 14px; line-height: 1.2;
+    }
+    .overlay-prose { font-size: 14px; line-height: 1.85; color: #5A4E44; }
+
+    .overlay-checks { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .overlay-check { display: flex; align-items: flex-start; gap: 10px; }
+    .overlay-check-icon { flex-shrink: 0; margin-top: 3px; color: var(--umbra); opacity: 0.5; }
+    .overlay-check-text { font-size: 13px; line-height: 1.65; color: #5A4E44; }
+
+    .overlay-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 36px; padding: 14px 24px;
+      background: var(--umbra); color: var(--bg);
+      border-radius: 3px; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      font-family: 'Manrope', sans-serif; text-decoration: none;
+      transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), background 0.3s ease;
+    }
+    .overlay-link:hover { transform: scale(1.02) translateY(-1px); background: #3D2B1A; }
 
     /* ─── i18n ─── */
-    [data-en] { }
     body.en [data-ru] { display: none; }
     body.en [data-en] { display: block; }
     body:not(.en) [data-en] { display: none; }
     body:not(.en) [data-ru] { display: block; }
-
     span[data-en], span[data-ru] { display: inline; }
     body.en span[data-ru] { display: none; }
     body:not(.en) span[data-en] { display: none; }
+
+    /* ─── АНИМАЦИИ ─── */
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeUp  { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="wrap">
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero-root">
+  <div class="hero-light"></div>
+  <div class="hero-light-2"></div>
+  <div class="hero-grain"></div>
 
-    <!-- HEADER -->
-    <header class="header">
-      <a href="#" class="logo">The Lineup</a>
-      <div class="header-right">
+  <div class="hero-wrap">
+
+    <header class="hero-header">
+      <a href="#" class="hero-logo">The Lineup</a>
+      <div class="hero-header-right">
         <span class="header-tag">
           <span data-ru>Бали, 2026</span>
           <span data-en>Bali, 2026</span>
@@ -381,238 +411,338 @@
       </div>
     </header>
 
-    <!-- HERO -->
-    <section class="hero">
+    <div class="hero-horizon"></div>
+
+    <section class="hero-section">
       <div class="hero-eyebrow">
-        <div class="hero-line"></div>
-        <span class="hero-eyebrow-text">Portfolio</span>
+        <div class="hero-eyebrow-line"></div>
+        <span class="hero-eyebrow-text">Portfolio · 2026</span>
       </div>
+
       <h1 class="hero-title">
-        <span data-ru>Берём<br>смысл.<br>Собираем <em>систему.</em><br>Запускаем.</span>
-        <span data-en>Take the<br>idea.<br>Build the <em>system.</em><br>Ship it.</span>
+        <span class="line-sm">
+          <span data-ru>Берём смысл.</span>
+          <span data-en>Take the idea.</span>
+        </span>
+        <span class="line-lg">
+          <span data-ru>Собираем</span>
+          <span data-en>Build the</span>
+        </span>
+        <span class="line-em">
+          <span data-ru>систему.</span>
+          <span data-en>system.</span>
+        </span>
+        <span class="line-action">
+          <span data-ru>Запускаем.</span>
+          <span data-en>Ship it.</span>
+        </span>
       </h1>
+
       <p class="hero-sub">
-        <span data-ru>Делаем как для себя — потому что часто это буквально так.</span>
-        <span data-en>We build like it's ours. Because often, it is.</span>
+        <span data-ru>Делаем как для себя —<br>потому что часто это буквально так.</span>
+        <span data-en>We build like it's ours.<br>Because often, it is.</span>
       </p>
     </section>
 
-    <div class="divider"></div>
+    <div class="hero-wave-wrap">
+      <svg class="hero-wave-svg" viewBox="0 0 624 64" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="beachFade" x1="0%" x2="100%" y1="0%" y2="0%">
+            <stop offset="0%"     stop-color="#2C1F14" stop-opacity="0"/>
+            <stop offset="28.8%"  stop-color="#2C1F14" stop-opacity="0"/>
+            <stop offset="41.6%"  stop-color="#2C1F14" stop-opacity="1"/>
+            <stop offset="73.7%"  stop-color="#2C1F14" stop-opacity="1"/>
+            <stop offset="86.5%"  stop-color="#2C1F14" stop-opacity="0"/>
+            <stop offset="100%"   stop-color="#2C1F14" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path id="wave1" stroke="#2C1F14" stroke-width="0.8" opacity="0.28"/>
+        <path id="wave2" stroke="url(#beachFade)" stroke-width="0.5" opacity="0.55"/>
+      </svg>
+    </div>
 
-    <!-- CASES -->
-    <section class="cases">
-      <div class="section-label">
-        <span data-ru>Кейсы</span>
-        <span data-en>Cases</span>
-      </div>
-
-      <div class="card" onclick="toggle(this)">
-        <div class="card-head">
-          <div>
-            <span class="tag tag-indigo">Wellness · EU</span>
-            <div class="card-name">Екатерина Донна</div>
-            <div class="card-desc">
-              <span data-ru>E-commerce интерфейс для европейского рынка</span>
-              <span data-en>E-commerce interface for the European market</span>
-            </div>
-          </div>
-          <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="check-list">
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Двуязычный сайт RU/FR с аудиоплеером</span><span data-en>Bilingual RU/FR site with audio player</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Stripe + Supabase, токенизированный доступ</span><span data-en>Stripe + Supabase, tokenized access</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Продуктовая матрица, воронка через Resend</span><span data-en>Product matrix, sales funnel via Resend</span></span>
-            </div>
-          </div>
-          <div class="card-links">
-            <a href="/donna-case.html" class="card-link card-link-case" onclick="event.stopPropagation()">
-              <span data-ru>Разбор кейса</span><span data-en>Case study</span>
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1 5.5h8M6 2l3.5 3.5L6 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="https://ekaterina-donnat.com" class="card-link" onclick="event.stopPropagation()" target="_blank">
-              <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" onclick="toggle(this)">
-        <div class="card-head">
-          <div>
-            <span class="tag tag-burgundy">B2B · Moscow</span>
-            <div class="card-name">ЭПАС</div>
-            <div class="card-desc">
-              <span data-ru>Цифровая инфраструктура крупной реставрационной компании</span>
-              <span data-en>Digital infrastructure for a major restoration company</span>
-            </div>
-          </div>
-          <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="check-list">
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Сайт-портфолио с базой 110 объектов</span><span data-en>Portfolio site with 110-object database</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Управление DNS, CDN через Cloudflare R2</span><span data-en>DNS management, CDN via Cloudflare R2</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Две презентации PPTX, документация проектов</span><span data-en>Two PPTX decks, full project documentation</span></span>
-            </div>
-          </div>
-          <div class="card-links">
-            <a href="https://studio-epas.ru" class="card-link" onclick="event.stopPropagation()" target="_blank">
-              <span data-ru>Открыть сайт</span><span data-en>Visit site</span>
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" onclick="toggle(this)">
-        <div class="card-head">
-          <div>
-            <span class="tag tag-amber">Sales Tech</span>
-            <div class="card-name">Audio Laguna</div>
-            <div class="card-desc">
-              <span data-ru>Экосистема микроприложений и автоматизация воронок продаж</span>
-              <span data-en>Micro-app ecosystem and automated sales funnels</span>
-            </div>
-          </div>
-          <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="check-list">
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Автономные воронки для RU и EN рынков</span><span data-en>Autonomous funnels for RU and EN markets</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Партнёрские сделки, пассивный доход с продаж</span><span data-en>B2B collaborations, passive revenue from sales</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Аудит-приложение, SVG-визуализация по 9 слоям</span><span data-en>Audit app, SVG visualization across 9 layers</span></span>
-            </div>
-          </div>
-          <div class="card-links">
-            <a href="#" class="card-link" onclick="event.stopPropagation()">
-              <span data-ru>Открыть проект</span><span data-en>View project</span>
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" onclick="toggle(this)">
-        <div class="card-head">
-          <div>
-            <span class="tag tag-purple">Wellness · Bali</span>
-            <div class="card-name">Illume</div>
-            <div class="card-desc">
-              <span data-ru>Коммерческий прототип для ретритов и аудиомедитаций</span>
-              <span data-en>Commercial prototype for retreats and audio meditations</span>
-            </div>
-          </div>
-          <div class="card-chevron">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 7l4.5 4.5L13.5 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="check-list">
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Первая версия на Tilda, стили под проект</span><span data-en>MVP on Tilda with custom Tailwind</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Звуковые практики — упакованы в цифровой продукт</span><span data-en>Sound healing packaged as a digital product</span></span>
-            </div>
-            <div class="check-item">
-              <div class="check-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <span class="check-text"><span data-ru>Бренд-система, аудитория 35+, без эзотерики</span><span data-en>Brand system, 35+ audience, no esoteric fluff</span></span>
-            </div>
-          </div>
-          <div class="card-links">
-            <a href="https://i11ume.com" class="card-link" onclick="event.stopPropagation()" target="_blank">
-              <span data-ru>Открыть проект</span><span data-en>View project</span>
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- CONTACTS -->
-    <section class="contacts" id="contact">
-      <div class="hero-eyebrow" style="margin-bottom: 24px;">
-        <div class="hero-line"></div>
-        <span class="hero-eyebrow-text">
-          <span data-ru>Контакт</span><span data-en>Contact</span>
+    <div class="hero-bottom">
+      <div class="scroll-hint">
+        <span class="scroll-text">
+          <span data-ru>Прокрутить</span>
+          <span data-en>Scroll</span>
         </span>
+        <div class="scroll-line"></div>
       </div>
-      <h2 class="contacts-title">
-        <span data-ru>Обсудим<br>ваш проект</span>
-        <span data-en>Let's discuss<br>your project</span>
-      </h2>
-      <div class="contact-links">
-        <a href="https://wa.me/6287761350307" class="contact-btn contact-btn-wa">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp
-        </a>
-        <a href="https://t.me/+6287761350307" class="contact-btn contact-btn-tg">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          Telegram
-        </a>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <span class="footer-copy">© 2026 The Lineup</span>
-        <span class="footer-domain">thelineup.design</span>
-      </div>
-    </footer>
+      <a href="#contact" class="hero-cta">
+        <span data-ru>Давайте поговорим</span>
+        <span data-en>Let's talk</span>
+        <svg class="cta-arrow" width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <path d="M1 6.5h10M7 2l4.5 4.5L7 11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
 
   </div>
+</section>
 
-  <script>
-    function toggle(card) {
-      var body = card.querySelector('.card-body');
-      var chevron = card.querySelector('.card-chevron');
-      var isOpen = body.classList.contains('open');
-      body.classList.toggle('open', !isOpen);
-      chevron.classList.toggle('open', !isOpen);
-    }
+<!-- ═══════════════════════════════ CASES ═══════════════════════════════ -->
+<section class="cases-section">
 
-    function setLang(lang) {
-      document.body.classList.toggle('en', lang === 'en');
-      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  <div class="cases-head fade-in">
+    <div class="section-label">
+      <span data-ru>Кейсы</span>
+      <span data-en>Cases</span>
+    </div>
+    <div class="section-hint">
+      <span data-ru>Листайте вправо</span>
+      <span data-en>Swipe right</span>
+      <svg width="28" height="10" viewBox="0 0 28 10" fill="none">
+        <path d="M0 5h24M20 1l4 4-4 4" stroke="#8C7B6E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <div style="position:relative">
+    <div class="track-outer" id="track">
+      <div class="track">
+
+        <div class="case-card card-in" onclick="openCase('donna')">
+          <span class="tag tag-eu">Wellness · EU</span>
+          <div class="card-name">Екатерина<br>Донна</div>
+          <div class="card-desc">
+            <span data-ru>E-commerce интерфейс для европейского рынка</span>
+            <span data-en>E-commerce interface for the European market</span>
+          </div>
+          <div class="card-foot">
+            <span class="card-cta">
+              <span data-ru>Читать кейс</span>
+              <span data-en>Read case</span>
+            </span>
+            <div class="card-arrow">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card card-in" onclick="openCase('epas')" style="transition-delay:0.08s">
+          <span class="tag tag-moscow">B2B · Москва</span>
+          <div class="card-name">ЭПАС</div>
+          <div class="card-desc">
+            <span data-ru>Цифровая инфраструктура крупной реставрационной компании</span>
+            <span data-en>Digital infrastructure for a major restoration company</span>
+          </div>
+          <div class="card-foot">
+            <span class="card-cta">
+              <span data-ru>Читать кейс</span>
+              <span data-en>Read case</span>
+            </span>
+            <div class="card-arrow">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card card-in" onclick="openCase('audio')" style="transition-delay:0.16s">
+          <span class="tag tag-sales">Sales Tech</span>
+          <div class="card-name">Audio<br>Laguna</div>
+          <div class="card-desc">
+            <span data-ru>Экосистема микроприложений и автоматизация воронок продаж</span>
+            <span data-en>Micro-app ecosystem and automated sales funnels</span>
+          </div>
+          <div class="card-foot">
+            <span class="card-cta">
+              <span data-ru>Читать кейс</span>
+              <span data-en>Read case</span>
+            </span>
+            <div class="card-arrow">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-card card-in" onclick="openCase('illume')" style="transition-delay:0.24s">
+          <span class="tag tag-bali">Wellness · Bali</span>
+          <div class="card-name">Illume</div>
+          <div class="card-desc">
+            <span data-ru>Коммерческий прототип для ретритов и аудиомедитаций</span>
+            <span data-en>Commercial prototype for retreats and audio meditations</span>
+          </div>
+          <div class="card-foot">
+            <span class="card-cta">
+              <span data-ru>Читать кейс</span>
+              <span data-en>Read case</span>
+            </span>
+            <div class="card-arrow">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="track-fade"></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════ CONTACTS ═══════════════════════════════ -->
+<section class="contacts" id="contact">
+  <div class="contacts-wrap">
+    <div class="contacts-eyebrow fade-in">
+      <div class="contacts-eyebrow-line"></div>
+      <span class="contacts-eyebrow-text">
+        <span data-ru>Контакт</span>
+        <span data-en>Contact</span>
+      </span>
+    </div>
+    <h2 class="contacts-title fade-in">
+      <span data-ru>Обсудим<br>ваш проект</span>
+      <span data-en>Let's discuss<br>your project</span>
+    </h2>
+    <div class="contact-btns fade-in">
+      <a href="https://wa.me/6287761350307" class="contact-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.6"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://t.me/+6287761350307" class="contact-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.6"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 The Lineup</span>
+    <span class="footer-domain">thelineup.design</span>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════ OVERLAY ═══════════════════════════════ -->
+<div class="overlay" id="overlay">
+  <div class="overlay-backdrop" onclick="closeCase()"></div>
+  <div class="overlay-panel">
+    <div class="overlay-inner" id="overlayContent"></div>
+  </div>
+</div>
+
+<script>
+  /* ── волны ── */
+  var W = 624;
+  var w1 = document.getElementById('wave1');
+  var w2 = document.getElementById('wave2');
+  var BEACH_START = 180, BEACH_END = 520;
+
+  function drawWaves(ts) {
+    var t = ts * 0.0004;
+    var d1 = 'M0 16';
+    for (var x = 0; x <= W; x += 3) {
+      var y = 16 + Math.sin(x*0.014+t)*7 + Math.sin(x*0.028+t*1.3+1.2)*3.5 + Math.sin(x*0.007+t*0.6+2.5)*5;
+      d1 += ' L'+x+' '+y.toFixed(2);
     }
-  </script>
+    w1.setAttribute('d', d1);
+
+    var ph = Math.PI/3;
+    var d2 = 'M'+BEACH_START+' 42';
+    for (var x = BEACH_START; x <= BEACH_END; x += 3) {
+      var y = 42 + Math.sin(x*0.018+t*0.65+ph)*3.5 + Math.sin(x*0.036+t*0.88+ph+0.9)*1.8 + Math.sin(x*0.009+t*0.4+ph+2.1)*2.2;
+      d2 += ' L'+x+' '+y.toFixed(2);
+    }
+    w2.setAttribute('d', d2);
+    requestAnimationFrame(drawWaves);
+  }
+  requestAnimationFrame(drawWaves);
+
+  /* ── drag-scroll трек ── */
+  var track = document.getElementById('track');
+  var dragging = false, startX, scrollLeft;
+  track.addEventListener('mousedown', function(e){ dragging=true; startX=e.pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
+  track.addEventListener('mouseleave', function(){ dragging=false; });
+  track.addEventListener('mouseup', function(){ dragging=false; });
+  track.addEventListener('mousemove', function(e){ if(!dragging) return; e.preventDefault(); track.scrollLeft=scrollLeft-(e.pageX-track.offsetLeft-startX); });
+
+  /* ── intersection observer ── */
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in, .card-in').forEach(function(el){ obs.observe(el); });
+
+  /* ── i18n ── */
+  function setLang(lang) {
+    document.body.classList.toggle('en', lang==='en');
+    document.getElementById('btn-ru').classList.toggle('active', lang==='ru');
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  }
+
+  /* ── данные кейсов ── */
+  var cases = {
+    donna: {
+      tagClass:'tag-eu', tagText:'Wellness · EU',
+      title:'Екатерина<br>Донна',
+      sub:'E-commerce экосистема · Аудиомедитации · Европейский рынок',
+      eyebrow:'Задача',
+      sectionTitle:'Цифровая упаковка практики гипнотерапевта',
+      prose:'Екатерина Донна — швейцарский гипнотерапевт с аудиторией в России и Франции. Задача — выстроить полный цикл продаж без менеджера: от рекламного ролика до закрытого плеера с токенизированным доступом. Не лендинг, а работающая коммерческая система.',
+      checks:['Двуязычный сайт RU/FR с аудиоплеером','Stripe + Supabase, токенизированный доступ','Продуктовая матрица, воронка через Resend','Четыре независимых пути трафика'],
+      link:'https://ekaterina-donnat.com', linkText:'Открыть сайт'
+    },
+    epas: {
+      tagClass:'tag-moscow', tagText:'B2B · Москва',
+      title:'ЭПАС',
+      sub:'Цифровая инфраструктура · Реставрация · Москва',
+      eyebrow:'Задача',
+      sectionTitle:'Портфолио и инфраструктура реставрационной компании',
+      prose:'Цифровая инфраструктура под ключ для одной из ведущих реставрационных компаний Москвы. База из 110 объектов, управление DNS и CDN, полная документация проектов.',
+      checks:['Сайт-портфолио с базой 110 объектов','Управление DNS, CDN через Cloudflare R2','Две презентации PPTX, документация проектов'],
+      link:'https://studio-epas.ru', linkText:'Открыть сайт'
+    },
+    audio: {
+      tagClass:'tag-sales', tagText:'Sales Tech',
+      title:'Audio<br>Laguna',
+      sub:'Микроприложения · Воронки продаж · RU + EN',
+      eyebrow:'Задача',
+      sectionTitle:'Экосистема автономных воронок',
+      prose:'Партнёрский проект с автономными воронками для русского и английского рынков. Пассивный доход с продаж, партнёрские сделки, аудит-приложение с SVG-визуализацией по 9 слоям.',
+      checks:['Автономные воронки для RU и EN рынков','Партнёрские сделки, пассивный доход с продаж','Аудит-приложение, SVG-визуализация по 9 слоям'],
+      link:'#', linkText:'Скоро'
+    },
+    illume: {
+      tagClass:'tag-bali', tagText:'Wellness · Bali',
+      title:'Illume',
+      sub:'Ретриты · Аудиомедитации · Бали',
+      eyebrow:'Задача',
+      sectionTitle:'Коммерческий прототип для звуковых практик',
+      prose:'Упаковка звуковых практик и ретритов в цифровой продукт. Фирменный стиль, аудитория 35+, без эзотерики. Первая версия на Tilda со стилями под проект.',
+      checks:['Первая версия на Tilda, стили под проект','Звуковые практики — упакованы в цифровой продукт','Фирменный стиль, аудитория 35+, без эзотерики'],
+      link:'https://i11ume.com', linkText:'Открыть сайт'
+    }
+  };
+
+  function openCase(id) {
+    var c = cases[id];
+    var checks = c.checks.map(function(t){
+      return '<div class="overlay-check"><div class="overlay-check-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7.5l3.5 3.5 6.5-7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="overlay-check-text">'+t+'</span></div>';
+    }).join('');
+    document.getElementById('overlayContent').innerHTML =
+      '<button class="overlay-back" onclick="closeCase()"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M9 1L4 6.5 9 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Назад</button>'+
+      '<span class="overlay-tag tag '+c.tagClass+'">'+c.tagText+'</span>'+
+      '<h1 class="overlay-title">'+c.title+'</h1>'+
+      '<p class="overlay-sub">'+c.sub+'</p>'+
+      '<div class="overlay-divider"></div>'+
+      '<p class="overlay-eyebrow">'+c.eyebrow+'</p>'+
+      '<h2 class="overlay-section-title">'+c.sectionTitle+'</h2>'+
+      '<p class="overlay-prose">'+c.prose+'</p>'+
+      '<div class="overlay-checks">'+checks+'</div>'+
+      '<a href="'+c.link+'" class="overlay-link" target="_blank">'+c.linkText+' <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 9L9 2M9 2H4M9 2v5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
+    document.getElementById('overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCase() {
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeCase(); });
+</script>
 
 </body>
 </html>
