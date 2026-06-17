@@ -129,34 +129,87 @@ body{
 
 /* ── воронки ── */
 /* ── табы воронок ── */
-.funnel-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:28px;overflow-x:auto;scrollbar-width:none}
-.funnel-tabs::-webkit-scrollbar{display:none}
-.funnel-tab{
-  flex-shrink:0;padding:12px 20px;
-  font-size:11px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);cursor:pointer;background:none;border:none;
-  font-family:'Manrope',sans-serif;
-  border-bottom:2px solid transparent;margin-bottom:-1px;
+.funnel-tabs{display:flex;gap:4px;border-bottom:1px solid var(--border);margin-top:28px;flex-wrap:wrap}
+.ftab{
+  display:flex;align-items:baseline;gap:8px;
+  padding:10px 16px 12px;
+  background:none;border:none;border-bottom:2px solid transparent;
+  cursor:pointer;font-family:'Manrope',sans-serif;
+  color:var(--muted);margin-bottom:-1px;
   transition:color 0.2s,border-color 0.2s;
 }
-.funnel-tab:hover{color:var(--text)}
-.funnel-tab.active{color:var(--umbra);border-bottom-color:var(--umbra)}
-.funnel-panels{margin-top:0}
-.funnel-panel{display:none;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:28px}
-.funnel-panel.active{display:block}
-.funnel-panel-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:26px;color:var(--text);margin-bottom:20px}
-.funnel-steps{display:flex;flex-direction:column;gap:0}
-.funnel-step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
-.funnel-step:last-child{border-bottom:none}
-.funnel-step-num{
-  flex-shrink:0;width:22px;height:22px;border-radius:50%;
-  background:rgba(44,31,20,0.08);border:1px solid rgba(44,31,20,0.18);
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:500;color:var(--umbra);margin-top:1px;
+.ftab:hover{color:var(--text)}
+.ftab.active{color:var(--text);border-bottom-color:var(--umbra)}
+.ftab-num{font-size:10px;letter-spacing:0.12em;color:var(--umbra);opacity:0.5;font-weight:500}
+.ftab.active .ftab-num{opacity:1}
+.ftab-label{font-size:13px;font-weight:400}
+
+/* панели */
+.fpanel{display:none;padding:28px 0 0}
+.fpanel.active{display:block}
+
+.fpanel-meta{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;margin-bottom:20px;flex-wrap:wrap;
 }
-.funnel-step-text{font-size:13px;color:#4A4038;font-weight:300;line-height:1.6}
-.funnel-step-accent{color:var(--umbra);font-weight:400}
-.funnel-step-end{color:#5A8C6A;font-weight:400}
+.fpanel-src{font-size:12px;color:var(--muted);letter-spacing:0.02em}
+.fpanel-traffic{
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--umbra);opacity:0.7;
+}
+
+/* шаги с вертикальной линией */
+.fsteps{
+  display:flex;flex-direction:column;
+  position:relative;padding-left:24px;margin-bottom:24px;
+}
+.fsteps::before{
+  content:'';position:absolute;left:5px;top:8px;bottom:8px;
+  width:1px;background:var(--border);
+}
+.fstep{display:flex;align-items:flex-start;gap:14px;padding:10px 0;position:relative}
+.fstep-dot{
+  flex-shrink:0;width:10px;height:10px;border-radius:50%;
+  border:1px solid var(--border);background:var(--bg);
+  margin-top:3px;margin-left:-24px;position:relative;z-index:1;
+  transition:border-color 0.2s;
+}
+.fstep-dot.accent{border-color:var(--umbra);background:rgba(44,31,20,0.12)}
+.fstep-dot.end{border-color:#5A8C6A;background:rgba(90,140,106,0.12)}
+.fstep.highlight .fstep-text{color:var(--text)}
+.fstep-text{font-size:13px;line-height:1.65;color:var(--muted);font-weight:300}
+.fstep-text code{
+  font-size:11px;background:rgba(30,36,32,0.08);
+  border:1px solid var(--border);border-radius:3px;
+  padding:1px 6px;color:var(--graphite);
+  font-family:'SF Mono','Fira Code',monospace;
+}
+.fstep-text strong{color:var(--text);font-weight:500}
+
+/* чипы */
+.fpanel-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.fchip{
+  font-size:11px;background:var(--surface);
+  border:1px solid var(--border);border-radius:2px;
+  padding:4px 12px;color:var(--muted);letter-spacing:0.02em;
+}
+
+/* футер воронки */
+.funnel-footer{
+  margin-top:32px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.funnel-footer-label{
+  font-size:10px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--muted);opacity:0.6;
+}
+.funnel-footer-chain{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fchain-item{
+  font-size:12px;background:var(--surface);
+  border:1px solid var(--border);border-radius:2px;
+  padding:4px 12px;color:var(--text);opacity:0.8;
+}
+.fchain-arrow{font-size:12px;color:var(--umbra);opacity:0.45}
 
 /* ── архитектура ── */
 .arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
@@ -280,55 +333,153 @@ body{
     <p class="prose">Каждый источник трафика имеет свою точку входа, свою механику прогрева и свой путь к покупке.</p>
 
     <div class="funnel-tabs">
-      <button class="funnel-tab active" onclick="showFunnel('f1',this)">01 · Instagram</button>
-      <button class="funnel-tab" onclick="showFunnel('f2',this)">02 · Сарафан</button>
-      <button class="funnel-tab" onclick="showFunnel('f3',this)">03 · Органика</button>
-      <button class="funnel-tab" onclick="showFunnel('f4',this)">04 · Прямая покупка</button>
+      <button class="ftab active" data-panel="f0" onclick="funnelShow('f0')">
+        <span class="ftab-num">01</span><span class="ftab-label">Instagram / FB</span>
+      </button>
+      <button class="ftab" data-panel="f1" onclick="funnelShow('f1')">
+        <span class="ftab-num">02</span><span class="ftab-label">Сарафан</span>
+      </button>
+      <button class="ftab" data-panel="f2" onclick="funnelShow('f2')">
+        <span class="ftab-num">03</span><span class="ftab-label">Органика</span>
+      </button>
+      <button class="ftab" data-panel="f3" onclick="funnelShow('f3')">
+        <span class="ftab-num">04</span><span class="ftab-label">Прямая покупка</span>
+      </button>
     </div>
 
-    <div class="funnel-panels">
-
-      <div class="funnel-panel active" id="f1">
-        <div class="funnel-panel-title">Instagram / Facebook</div>
-        <div class="funnel-steps">
-          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Рилс → <span class="funnel-step-accent">demo.html?utm_source=instagram</span></span></div>
-          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Демо-трек 21 мин — перемотка заблокирована, атмосфера работает</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text"><span class="funnel-step-accent">FB Pixel Lead</span> срабатывает на 3-й минуте прослушивания</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text">Кнопка покупки разблокируется на 90% трека</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">5</div><span class="funnel-step-text">Stripe → <span class="funnel-step-end">токен по email → закрытый плеер</span></span></div>
+    <div class="fpanel active" id="f0">
+      <div class="fpanel-meta">
+        <span class="fpanel-src">Рилс → демо-плеер → Stripe → плеер</span>
+        <span class="fpanel-traffic">Холодный трафик</span>
+      </div>
+      <div class="fsteps">
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Рилс уходит на <code>demo.html?utm_source=instagram</code></span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Демо-трек 21 мин · перемотка заблокирована</span>
+        </div>
+        <div class="fstep highlight">
+          <div class="fstep-dot accent"></div>
+          <span class="fstep-text">FB Pixel Lead срабатывает на <strong>3-й минуте</strong></span>
+        </div>
+        <div class="fstep highlight">
+          <div class="fstep-dot accent"></div>
+          <span class="fstep-text">Кнопка покупки разблокируется на <strong>90%</strong> прослушивания</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot end"></div>
+          <span class="fstep-text">Stripe → токен по email → закрытый плеер</span>
         </div>
       </div>
+      <div class="fpanel-chips">
+        <span class="fchip">Instagram · Facebook</span>
+        <span class="fchip">FB Pixel + Supabase</span>
+        <span class="fchip">Mood Engine</span>
+      </div>
+    </div>
 
-      <div class="funnel-panel" id="f2">
-        <div class="funnel-panel-title">Сарафан</div>
-        <div class="funnel-steps">
-          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Ссылка в мессенджере — <span class="funnel-step-accent">?utm_source=referral</span></span></div>
-          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Плашка «Тебе это прислал близкий человек» — доверие с первой секунды</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text">Тот же демо-плеер с Mood Engine — среда подстраивается</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text">Stripe → <span class="funnel-step-end">токен → index.html</span></span></div>
+    <div class="fpanel" id="f1">
+      <div class="fpanel-meta">
+        <span class="fpanel-src">Ссылка в мессенджере → доверие → Stripe → плеер</span>
+        <span class="fpanel-traffic">Тёплый трафик</span>
+      </div>
+      <div class="fsteps">
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Ссылка в мессенджере → <code>?utm_source=referral</code></span>
+        </div>
+        <div class="fstep highlight">
+          <div class="fstep-dot accent"></div>
+          <span class="fstep-text">Плашка <strong>«Тебе это прислал близкий человек»</strong> — персональный прогрев</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Тот же демо-плеер с Mood Engine</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot end"></div>
+          <span class="fstep-text">Stripe → токен → <code>index.html</code></span>
         </div>
       </div>
+      <div class="fpanel-chips">
+        <span class="fchip">Существующие клиенты</span>
+        <span class="fchip">Социальное доказательство</span>
+        <span class="fchip">Конверсия выше среднего</span>
+      </div>
+    </div>
 
-      <div class="funnel-panel" id="f3">
-        <div class="funnel-panel-title">Органика / Pinterest</div>
-        <div class="funnel-steps">
-          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Pinterest / SEO → <span class="funnel-step-accent">ekaterina-donnat.com</span></span></div>
-          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Форма «Время выдохнуть» — мягкий захват без давления</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text">Email с демо-треком через <span class="funnel-step-accent">Resend</span></span></div>
-          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text"><span class="funnel-step-end">Гостевой токен → плеер → предложение полного курса</span></span></div>
+    <div class="fpanel" id="f2">
+      <div class="fpanel-meta">
+        <span class="fpanel-src">SEO / Pinterest → email-лид → демо → полный курс</span>
+        <span class="fpanel-traffic">Органика</span>
+      </div>
+      <div class="fsteps">
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Pinterest / SEO → <code>ekaterina-donnat.com</code></span>
+        </div>
+        <div class="fstep highlight">
+          <div class="fstep-dot accent"></div>
+          <span class="fstep-text">Форма <strong>«Время выдохнуть»</strong> — захват email</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Email с демо-треком через Resend</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot end"></div>
+          <span class="fstep-text">Гостевой токен → плеер → предложение полного курса</span>
         </div>
       </div>
+      <div class="fpanel-chips">
+        <span class="fchip">Resend · Supabase</span>
+        <span class="fchip">Бесплатный вход</span>
+        <span class="fchip">Email-база → курс</span>
+      </div>
+    </div>
 
-      <div class="funnel-panel" id="f4">
-        <div class="funnel-panel-title">Прямая покупка</div>
-        <div class="funnel-steps">
-          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Органика → <span class="funnel-step-accent">ekaterina-donnat.com</span></span></div>
-          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Аккордеон с продуктами — матрица 25€–650€</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text"><span class="funnel-step-accent">Stripe Payment Link</span> — без промежуточных шагов</span></div>
-          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text"><span class="funnel-step-end">Токен по email → закрытый плеер</span></span></div>
+    <div class="fpanel" id="f3">
+      <div class="fpanel-meta">
+        <span class="fpanel-src">Органика → продуктовая матрица → Stripe → плеер</span>
+        <span class="fpanel-traffic">Самый короткий путь</span>
+      </div>
+      <div class="fsteps">
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Органика → <code>ekaterina-donnat.com</code></span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot"></div>
+          <span class="fstep-text">Аккордеон с продуктами — матрица 25€–650€</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot accent"></div>
+          <span class="fstep-text highlight">Stripe Payment Link — без промежуточных шагов</span>
+        </div>
+        <div class="fstep">
+          <div class="fstep-dot end"></div>
+          <span class="fstep-text">Токен по email → закрытый плеер</span>
         </div>
       </div>
+      <div class="fpanel-chips">
+        <span class="fchip">Уже знакомы с продуктом</span>
+        <span class="fchip">25€ — 650€</span>
+        <span class="fchip">Без прогрева</span>
+      </div>
+    </div>
 
+    <div class="funnel-footer">
+      <span class="funnel-footer-label">Финал всех путей</span>
+      <div class="funnel-footer-chain">
+        <span class="fchain-item">Stripe</span>
+        <span class="fchain-arrow">→</span>
+        <span class="fchain-item">токен по email</span>
+        <span class="fchain-arrow">→</span>
+        <span class="fchain-item">закрытый плеер</span>
+      </div>
     </div>
   </div>
 
@@ -480,11 +631,10 @@ body{
 </div>
 
 <script>
-function showFunnel(id, btn) {
-  document.querySelectorAll('.funnel-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.funnel-tab').forEach(function(t){ t.classList.remove('active'); });
+function funnelShow(id) {
+  document.querySelectorAll('.fpanel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.toggle('active', b.dataset.panel === id); });
   document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
 }
 
 var obs = new IntersectionObserver(function(entries){
