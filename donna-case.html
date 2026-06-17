@@ -3,108 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ekaterina Donnat — The Lineup</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Екатерина Донна — The Lineup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
 :root{
-  --bg:#0A0A08;
-  --text:#EDEAE2;
-  --gold:#C8A84B;
-  --muted:#9A9690;
-  --border:#2E2E2B;
-  --tag-bg:#1A1A36;
-  --tag-text:#9090D8;
-  --surface:#111110;
+  --bg:       #D8CEB8;
+  --surface:  #CCC0A8;
+  --surface-2:#C5B89C;
+  --text:     #1A1814;
+  --muted:    #7A6E60;
+  --faint:    #8A7E70;
+  --border:   rgba(30,36,32,0.16);
+  --umbra:    #2C1F14;
+  --graphite: #1E2420;
 }
+
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;font-weight:300;line-height:1.7;font-size:15px}
 
-.page{max-width:760px;margin:0 auto;padding:48px 24px 80px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Manrope',sans-serif;
+  font-weight:300;
+  line-height:1.75;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+}
 
-.back{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;text-decoration:none;letter-spacing:0.04em;margin-bottom:56px;transition:color 0.2s}
+/* ── свет ── */
+.page-light{
+  position:fixed;top:-100px;right:-60px;
+  width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(ellipse at 40% 40%, rgba(255,248,220,0.38) 0%, transparent 65%);
+  pointer-events:none;z-index:0;
+  animation:lightDrift 11s ease-in-out infinite;
+}
+@keyframes lightDrift{
+  0%,100%{transform:translate(0,0) scale(1)}
+  40%{transform:translate(-20px,30px) scale(1.05)}
+  70%{transform:translate(15px,-20px) scale(0.97)}
+}
+
+.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:48px 28px 96px}
+
+/* ── шапка ── */
+.back{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--muted);font-size:11px;text-decoration:none;
+  letter-spacing:0.16em;text-transform:uppercase;
+  margin-bottom:56px;
+  transition:color 0.2s;
+}
 .back:hover{color:var(--text)}
-.back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round}
 
-.tag{display:inline-block;background:var(--tag-bg);color:var(--tag-text);font-family:'Manrope',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:2px;margin-bottom:24px}
+/* ── тег ── */
+.tag{
+  display:inline-block;
+  background:rgba(61,79,66,0.10);color:#3D4F42;
+  border:1px solid rgba(61,79,66,0.22);
+  font-family:'Manrope',sans-serif;font-size:10px;font-weight:400;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:4px 12px;border-radius:20px;margin-bottom:24px;
+}
 
-.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,7vw,62px);line-height:1.08;letter-spacing:-0.01em;margin-bottom:20px}
-.hero-sub{color:var(--muted);font-size:14px;font-weight:300;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:40px}
+/* ── hero ── */
+.hero-title{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(42px,8vw,72px);line-height:1.04;letter-spacing:-0.02em;
+  margin-bottom:16px;
+  opacity:0;animation:fadeUp 0.9s ease 0.1s forwards;
+}
+.hero-sub{
+  color:var(--muted);font-size:13px;font-weight:300;
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:48px;
+  opacity:0;animation:fadeIn 0.9s ease 0.25s forwards;
+}
 
-.meta{display:flex;gap:32px;flex-wrap:wrap;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:64px}
-.meta-item{display:flex;flex-direction:column;gap:4px}
-.meta-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
-.meta-val{font-size:14px;color:var(--text)}
-.meta-link{color:var(--gold);text-decoration:none;font-size:14px}
+/* ── мета ── */
+.meta{
+  display:flex;gap:0;flex-wrap:wrap;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  margin-bottom:72px;
+  opacity:0;animation:fadeIn 0.9s ease 0.35s forwards;
+}
+.meta-item{
+  display:flex;flex-direction:column;gap:5px;
+  padding:20px 32px 20px 0;
+  margin-right:32px;
+}
+.meta-item:first-child{padding-left:0}
+.meta-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+.meta-val{font-size:14px;color:var(--text);font-weight:300}
+.meta-link{color:var(--umbra);text-decoration:none;font-size:14px;font-weight:400}
 .meta-link:hover{text-decoration:underline}
+.meta-live{color:#5A8C6A;font-size:13px;display:flex;align-items:center;gap:6px}
+.meta-live-dot{width:6px;height:6px;border-radius:50%;background:#5A8C6A;flex-shrink:0}
 
-.section{margin-bottom:64px}
-.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:32px;line-height:1.2;margin-bottom:20px}
-.prose{color:#C8C5BC;font-size:15px;font-weight:300;line-height:1.75}
+/* ── секции ── */
+.section{margin-bottom:72px;opacity:0;transform:translateY(8px);transition:opacity 0.7s ease,transform 0.7s ease}
+.section.visible{opacity:1;transform:translateY(0)}
 
-.stack-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.chip{background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:6px 14px;font-size:12px;font-weight:400;letter-spacing:0.04em;color:var(--muted)}
-.chip.hi{border-color:#2E2E1A;color:var(--gold);background:#111108}
+.divider{height:1px;background:var(--border);margin:72px 0}
 
-.funnel-section{margin-bottom:64px}
-.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.eyebrow{font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--umbra);margin-bottom:14px}
+.section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,5vw,38px);line-height:1.15;margin-bottom:20px;color:var(--text)}
+.prose{color:#4A4038;font-size:15px;font-weight:300;line-height:1.8}
+.prose+.prose{margin-top:14px}
+
+/* ── чипы стека ── */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:3px;padding:6px 14px;
+  font-size:12px;font-weight:400;letter-spacing:0.04em;color:var(--muted);
+}
+.chip-hi{
+  border-color:rgba(44,31,20,0.25);color:var(--umbra);
+  background:rgba(44,31,20,0.06);
+}
+
+/* ── воронки ── */
+.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
 @media(max-width:560px){.funnel-grid{grid-template-columns:1fr}}
-.funnel-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:20px}
-.funnel-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-.funnel-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:18px;color:var(--text);margin-bottom:14px}
+
+.funnel-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;padding:22px;
+}
+.funnel-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.funnel-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;color:var(--text);margin-bottom:16px}
 .funnel-steps{display:flex;flex-direction:column;gap:0}
 .funnel-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
 .funnel-step:last-child{border-bottom:none}
-.funnel-arrow{color:var(--gold);font-size:11px;margin-top:3px;flex-shrink:0;opacity:0.6}
-.funnel-text{font-size:13px;color:#9A9690;font-weight:300;line-height:1.5}
+.funnel-arrow{color:var(--umbra);font-size:11px;margin-top:2px;flex-shrink:0;opacity:0.5}
+.funnel-text{font-size:13px;color:#4A4038;font-weight:300;line-height:1.55}
 
-.arch-block{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:560px){.arch-block{grid-template-columns:1fr}}
-.arch-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px}
-.arch-card-title{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.arch-list{list-style:none;display:flex;flex-direction:column;gap:5px}
-.arch-list li{font-size:13px;color:#C8C5BC;font-weight:300;padding-left:14px;position:relative}
-.arch-list li::before{content:'–';position:absolute;left:0;color:var(--gold);opacity:0.5}
+/* ── архитектура ── */
+.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+@media(max-width:560px){.arch-grid{grid-template-columns:1fr}}
 
-.highlight-card{background:var(--surface);border:1px solid #2E2E1A;border-left:2px solid var(--gold);border-radius:4px;padding:24px;margin-top:24px}
-.highlight-card-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;margin-bottom:10px}
-.highlight-card-text{font-size:13px;color:var(--muted);line-height:1.7}
+.arch-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;padding:20px;
+}
+.arch-card-title{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.arch-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.arch-list li{font-size:13px;color:#4A4038;font-weight:300;padding-left:14px;position:relative;line-height:1.5}
+.arch-list li::before{content:'–';position:absolute;left:0;color:var(--umbra);opacity:0.45}
 
+/* ── mood engine ── */
+.mood-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:2px solid var(--umbra);
+  border-radius:4px;padding:28px;margin-top:24px;
+}
+.mood-card-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:22px;margin-bottom:16px;color:var(--text)}
+.mood-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;margin-bottom:14px}
+.mood-state{font-size:13px;color:var(--text);font-weight:400}
+.mood-val{font-size:13px;color:var(--muted);font-weight:300}
+.mood-note{font-size:12px;color:var(--faint);line-height:1.6}
+
+/* ── матрица ── */
 .matrix{margin-top:24px;border:1px solid var(--border);border-radius:4px;overflow:hidden}
-.matrix-row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+.matrix-row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border)}
 .matrix-row:last-child{border-bottom:none}
 .matrix-row.header{background:var(--surface)}
-.matrix-label{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+.matrix-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
 .matrix-name{font-size:14px;color:var(--text);font-weight:300}
-.matrix-price{font-size:14px;color:var(--gold);font-weight:400;text-align:right;white-space:nowrap;padding-left:16px}
+.matrix-name.dim{color:var(--muted)}
+.matrix-price{font-size:14px;color:var(--umbra);font-weight:400;text-align:right;white-space:nowrap;padding-left:16px}
 .matrix-price.pending{color:var(--muted);font-size:12px}
 
-.contract-card{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:28px;margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
-@media(max-width:480px){.contract-card{grid-template-columns:1fr}}
-.contract-item{display:flex;flex-direction:column;gap:4px}
-.contract-key{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+/* ── контракт ── */
+.contract-grid{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;padding:28px;margin-top:24px;
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+@media(max-width:480px){.contract-grid{grid-template-columns:1fr}}
+.contract-item{display:flex;flex-direction:column;gap:5px}
+.contract-key{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
 .contract-val{font-size:15px;color:var(--text);font-weight:300}
-.contract-val.gold{color:var(--gold)}
+.contract-val.accent{color:var(--umbra);font-weight:400}
 
-.live-link{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:2px;padding:14px 24px;text-decoration:none;color:var(--text);font-size:14px;font-weight:400;letter-spacing:0.04em;transition:border-color 0.2s,color 0.2s;margin-top:24px}
-.live-link:hover{border-color:var(--gold);color:var(--gold)}
-.live-dot{width:7px;height:7px;border-radius:50%;background:#4CAF7D;flex-shrink:0}
+/* ── CTA ── */
+.live-link{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--border);border-radius:3px;
+  padding:14px 24px;text-decoration:none;
+  color:var(--text);font-size:13px;font-weight:400;letter-spacing:0.04em;
+  margin-top:28px;
+  transition:border-color 0.3s ease,transform 0.5s cubic-bezier(0.23,1,0.32,1);
+}
+.live-link:hover{border-color:var(--umbra);transform:translateY(-1px)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#5A8C6A;flex-shrink:0}
 
-.divider{border:none;border-top:1px solid var(--border);margin:64px 0}
+/* ── анимации ── */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important}
+}
 </style>
 </head>
 <body>
+
+<div class="page-light"></div>
+
 <div class="page">
 
   <a class="back" href="/">
-    <svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><polyline points="9,2 4,7 9,12"/></svg>
     The Lineup
   </a>
 
   <div class="tag">Wellness · EU</div>
 
-  <h1 class="hero-title">Ekaterina<br>Donnat</h1>
+  <h1 class="hero-title">Екатерина<br>Донна</h1>
   <p class="hero-sub">E-commerce экосистема · Аудиомедитации · Европейский рынок</p>
 
   <div class="meta">
@@ -122,23 +244,25 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
     </div>
     <div class="meta-item">
       <span class="meta-label">Статус</span>
-      <span class="meta-val" style="color:#4CAF7D">В работе</span>
+      <span class="meta-live"><span class="meta-live-dot"></span>В работе</span>
     </div>
   </div>
 
+  <!-- задача -->
   <div class="section">
-    <p class="section-eyebrow">Задача</p>
+    <p class="eyebrow">Задача</p>
     <h2 class="section-title">Цифровая упаковка практики гипнотерапевта</h2>
     <p class="prose">Екатерина Донна — швейцарский гипнотерапевт с аудиторией в России и Франции. Продукт: авторские аудиомедитации, структурированные в прогрессивную программу из 4 ступеней. Задача — выстроить полный цикл продаж без менеджера: от рекламного ролика до закрытого плеера с токенизированным доступом.</p>
-    <p class="prose" style="margin-top:12px">Не лендинг, а работающая коммерческая система. Четыре независимых воронки трафика, продуктовая матрица от 25€ до 650€, аналитический дашборд и автоматические email-цепочки через Resend.</p>
+    <p class="prose">Не лендинг, а работающая коммерческая система. Четыре независимых воронки трафика, продуктовая матрица от 25€ до 650€, аналитический дашборд и автоматические email-цепочки через Resend.</p>
   </div>
 
-  <hr class="divider">
+  <div class="divider"></div>
 
-  <div class="funnel-section">
-    <p class="section-eyebrow">Архитектура продаж</p>
+  <!-- воронки -->
+  <div class="section">
+    <p class="eyebrow">Архитектура продаж</p>
     <h2 class="section-title">Четыре независимых пути</h2>
-    <p class="prose">Каждый источник трафика имеет свою точку входа, свою механику прогрева и свой путь к покупке. Нет универсального маршрута — есть точечная работа с каждым сегментом.</p>
+    <p class="prose">Каждый источник трафика имеет свою точку входа, свою механику прогрева и свой путь к покупке.</p>
 
     <div class="funnel-grid">
       <div class="funnel-card">
@@ -152,7 +276,6 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
           <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe → токен по email → закрытый плеер</span></div>
         </div>
       </div>
-
       <div class="funnel-card">
         <div class="funnel-label">Путь 02</div>
         <div class="funnel-title">Сарафан</div>
@@ -163,7 +286,6 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
           <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe → токен → index.html</span></div>
         </div>
       </div>
-
       <div class="funnel-card">
         <div class="funnel-label">Путь 03</div>
         <div class="funnel-title">Органика / Pinterest</div>
@@ -174,7 +296,6 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
           <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Гостевой токен → плеер → предложение полного курса</span></div>
         </div>
       </div>
-
       <div class="funnel-card">
         <div class="funnel-label">Путь 04</div>
         <div class="funnel-title">Прямая покупка</div>
@@ -188,14 +309,15 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
     </div>
   </div>
 
-  <hr class="divider">
+  <div class="divider"></div>
 
+  <!-- стек -->
   <div class="section">
-    <p class="section-eyebrow">Технический стек</p>
+    <p class="eyebrow">Технический стек</p>
     <h2 class="section-title">Инфраструктура</h2>
     <p class="prose">Три домена с разными задачами. Серверные функции на Netlify без отдельного сервера. Supabase как операционная база с RLS-изоляцией чувствительных таблиц.</p>
 
-    <div class="arch-block">
+    <div class="arch-grid">
       <div class="arch-card">
         <div class="arch-card-title">Хостинг и доставка</div>
         <ul class="arch-list">
@@ -234,44 +356,45 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
       </div>
     </div>
 
-    <div class="stack-grid">
-      <span class="chip hi">Netlify Functions</span>
-      <span class="chip hi">Supabase</span>
-      <span class="chip hi">Stripe</span>
-      <span class="chip hi">Cloudflare R2</span>
+    <div class="chips">
+      <span class="chip chip-hi">Netlify Functions</span>
+      <span class="chip chip-hi">Supabase</span>
+      <span class="chip chip-hi">Stripe</span>
+      <span class="chip chip-hi">Cloudflare R2</span>
       <span class="chip">Tilda</span>
       <span class="chip">Resend</span>
       <span class="chip">FB Pixel</span>
-      <span class="chip">Manrope + Fraunces</span>
       <span class="chip">RLS PostgreSQL</span>
       <span class="chip">HMAC tokens</span>
     </div>
   </div>
 
-  <hr class="divider">
+  <div class="divider"></div>
 
+  <!-- mood engine -->
   <div class="section">
-    <p class="section-eyebrow">Нестандартное решение</p>
+    <p class="eyebrow">Нестандартное решение</p>
     <h2 class="section-title">Mood Engine</h2>
     <p class="prose">Клиентский модуль, который читает время суток и скорость соединения пользователя — и незаметно адаптирует атмосферу демо-плеера. Ночью с медленным интернетом сфера пульсирует медленнее, частиц меньше. Утром с быстрым соединением — плеер оживает.</p>
 
-    <div class="highlight-card">
-      <div class="highlight-card-title">Пять состояний окружения</div>
-      <div class="highlight-card-text" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin-top:12px">
-        <span style="color:#EDEAE2">Ночь + медленный интернет</span><span>Минимум частиц · очень медленный пульс</span>
-        <span style="color:#EDEAE2">Ночь + быстрый интернет</span><span>Редкие частицы · медленный пульс</span>
-        <span style="color:#EDEAE2">Утро + быстрый интернет</span><span>Средне · оживлённый пульс</span>
-        <span style="color:#EDEAE2">День</span><span>Стандарт · стандарт</span>
-        <span style="color:#EDEAE2">Вечер</span><span>Тихо · медленный пульс</span>
+    <div class="mood-card">
+      <div class="mood-card-title">Пять состояний окружения</div>
+      <div class="mood-grid">
+        <span class="mood-state">Ночь + медленный интернет</span><span class="mood-val">Минимум частиц · очень медленный пульс</span>
+        <span class="mood-state">Ночь + быстрый интернет</span><span class="mood-val">Редкие частицы · медленный пульс</span>
+        <span class="mood-state">Утро + быстрый интернет</span><span class="mood-val">Средне · оживлённый пульс</span>
+        <span class="mood-state">День</span><span class="mood-val">Стандарт · стандарт</span>
+        <span class="mood-state">Вечер</span><span class="mood-val">Тихо · медленный пульс</span>
       </div>
-      <p style="font-size:12px;color:#9A9690;margin-top:14px">Агрегированные данные профиля пишутся в Supabase. Персональных данных нет.</p>
+      <p class="mood-note">Агрегированные данные профиля пишутся в Supabase. Персональных данных нет.</p>
     </div>
   </div>
 
-  <hr class="divider">
+  <div class="divider"></div>
 
+  <!-- матрица -->
   <div class="section">
-    <p class="section-eyebrow">Монетизация</p>
+    <p class="eyebrow">Монетизация</p>
     <h2 class="section-title">Продуктовая матрица</h2>
     <p class="prose">Ценовой диапазон 25€–650€ — для разных ситуаций и бюджетов. Ступени 2–4 на предзаказе — формируют список ожидания. Отдельная скрытая ссылка для выпускников.</p>
 
@@ -285,18 +408,19 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
       <div class="matrix-row"><span class="matrix-name">Ступень 1 + чек-ап (4 практики + дневник)</span><span class="matrix-price">150€</span></div>
       <div class="matrix-row"><span class="matrix-name">Ступень 1 + разбор 2 часа</span><span class="matrix-price">310€</span></div>
       <div class="matrix-row"><span class="matrix-name">Ступень 1 + цикл 3 сессий</span><span class="matrix-price">650€</span></div>
-      <div class="matrix-row"><span class="matrix-name" style="color:#9A9690">Ступени 2–4 (предзаказ)</span><span class="matrix-price pending">сбор email</span></div>
-      <div class="matrix-row"><span class="matrix-name" style="color:#9A9690">Ступень 2 для выпускников (скрытая)</span><span class="matrix-price pending">125€</span></div>
+      <div class="matrix-row"><span class="matrix-name dim">Ступени 2–4 (предзаказ)</span><span class="matrix-price pending">сбор email</span></div>
+      <div class="matrix-row"><span class="matrix-name dim">Ступень 2 для выпускников (скрытая)</span><span class="matrix-price">125€</span></div>
     </div>
   </div>
 
-  <hr class="divider">
+  <div class="divider"></div>
 
+  <!-- контракт -->
   <div class="section">
-    <p class="section-eyebrow">Модель сотрудничества</p>
+    <p class="eyebrow">Модель сотрудничества</p>
     <h2 class="section-title">Гибридный контракт</h2>
 
-    <div class="contract-card">
+    <div class="contract-grid">
       <div class="contract-item">
         <span class="contract-key">Формат</span>
         <span class="contract-val">Гибрид · 6 месяцев</span>
@@ -307,15 +431,15 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
       </div>
       <div class="contract-item">
         <span class="contract-key">С 3-го месяца</span>
-        <span class="contract-val gold">120€ / мес</span>
+        <span class="contract-val accent">120€ / мес</span>
       </div>
       <div class="contract-item">
         <span class="contract-key">Цифровые продажи</span>
-        <span class="contract-val gold">12%</span>
+        <span class="contract-val accent">12%</span>
       </div>
       <div class="contract-item">
         <span class="contract-key">Комбо-продукты</span>
-        <span class="contract-val gold">8%</span>
+        <span class="contract-val accent">8%</span>
       </div>
       <div class="contract-item">
         <span class="contract-key">Личные сессии</span>
@@ -327,9 +451,19 @@ body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;fon
   <a class="live-link" href="https://ekaterina-donnat.com" target="_blank">
     <span class="live-dot"></span>
     ekaterina-donnat.com
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 9.5L9.5 2.5M5 2.5h4.5v4.5"/></svg>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2.5 9.5L9.5 2.5M5 2.5h4.5v4.5"/></svg>
   </a>
 
 </div>
+
+<script>
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.section').forEach(function(el){ obs.observe(el); });
+</script>
+
 </body>
 </html>
