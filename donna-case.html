@@ -128,20 +128,35 @@ body{
 }
 
 /* ── воронки ── */
-.funnel-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-@media(max-width:560px){.funnel-grid{grid-template-columns:1fr}}
-
-.funnel-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:4px;padding:22px;
+/* ── табы воронок ── */
+.funnel-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:28px;overflow-x:auto;scrollbar-width:none}
+.funnel-tabs::-webkit-scrollbar{display:none}
+.funnel-tab{
+  flex-shrink:0;padding:12px 20px;
+  font-size:11px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;background:none;border:none;
+  font-family:'Manrope',sans-serif;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:color 0.2s,border-color 0.2s;
 }
-.funnel-label{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.funnel-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:20px;color:var(--text);margin-bottom:16px}
+.funnel-tab:hover{color:var(--text)}
+.funnel-tab.active{color:var(--umbra);border-bottom-color:var(--umbra)}
+.funnel-panels{margin-top:0}
+.funnel-panel{display:none;background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;padding:28px}
+.funnel-panel.active{display:block}
+.funnel-panel-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:26px;color:var(--text);margin-bottom:20px}
 .funnel-steps{display:flex;flex-direction:column;gap:0}
-.funnel-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.funnel-step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
 .funnel-step:last-child{border-bottom:none}
-.funnel-arrow{color:var(--umbra);font-size:11px;margin-top:2px;flex-shrink:0;opacity:0.5}
-.funnel-text{font-size:13px;color:#4A4038;font-weight:300;line-height:1.55}
+.funnel-step-num{
+  flex-shrink:0;width:22px;height:22px;border-radius:50%;
+  background:rgba(44,31,20,0.08);border:1px solid rgba(44,31,20,0.18);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:500;color:var(--umbra);margin-top:1px;
+}
+.funnel-step-text{font-size:13px;color:#4A4038;font-weight:300;line-height:1.6}
+.funnel-step-accent{color:var(--umbra);font-weight:400}
+.funnel-step-end{color:#5A8C6A;font-weight:400}
 
 /* ── архитектура ── */
 .arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
@@ -264,48 +279,56 @@ body{
     <h2 class="section-title">Четыре независимых пути</h2>
     <p class="prose">Каждый источник трафика имеет свою точку входа, свою механику прогрева и свой путь к покупке.</p>
 
-    <div class="funnel-grid">
-      <div class="funnel-card">
-        <div class="funnel-label">Путь 01</div>
-        <div class="funnel-title">Instagram / Facebook</div>
+    <div class="funnel-tabs">
+      <button class="funnel-tab active" onclick="showFunnel('f1',this)">01 · Instagram</button>
+      <button class="funnel-tab" onclick="showFunnel('f2',this)">02 · Сарафан</button>
+      <button class="funnel-tab" onclick="showFunnel('f3',this)">03 · Органика</button>
+      <button class="funnel-tab" onclick="showFunnel('f4',this)">04 · Прямая покупка</button>
+    </div>
+
+    <div class="funnel-panels">
+
+      <div class="funnel-panel active" id="f1">
+        <div class="funnel-panel-title">Instagram / Facebook</div>
         <div class="funnel-steps">
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Рилс → demo.html?utm_source=instagram</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Демо-трек 21 мин, перемотка заблокирована</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">FB Pixel Lead на 3-й минуте</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Кнопка покупки разблокируется на 90%</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe → токен по email → закрытый плеер</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Рилс → <span class="funnel-step-accent">demo.html?utm_source=instagram</span></span></div>
+          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Демо-трек 21 мин — перемотка заблокирована, атмосфера работает</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text"><span class="funnel-step-accent">FB Pixel Lead</span> срабатывает на 3-й минуте прослушивания</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text">Кнопка покупки разблокируется на 90% трека</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">5</div><span class="funnel-step-text">Stripe → <span class="funnel-step-end">токен по email → закрытый плеер</span></span></div>
         </div>
       </div>
-      <div class="funnel-card">
-        <div class="funnel-label">Путь 02</div>
-        <div class="funnel-title">Сарафан</div>
+
+      <div class="funnel-panel" id="f2">
+        <div class="funnel-panel-title">Сарафан</div>
         <div class="funnel-steps">
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Ссылка в мессенджере ?utm_source=referral</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Плашка «Тебе это прислал близкий человек»</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Тот же демо-плеер с Mood Engine</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe → токен → index.html</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Ссылка в мессенджере — <span class="funnel-step-accent">?utm_source=referral</span></span></div>
+          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Плашка «Тебе это прислал близкий человек» — доверие с первой секунды</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text">Тот же демо-плеер с Mood Engine — среда подстраивается</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text">Stripe → <span class="funnel-step-end">токен → index.html</span></span></div>
         </div>
       </div>
-      <div class="funnel-card">
-        <div class="funnel-label">Путь 03</div>
-        <div class="funnel-title">Органика / Pinterest</div>
+
+      <div class="funnel-panel" id="f3">
+        <div class="funnel-panel-title">Органика / Pinterest</div>
         <div class="funnel-steps">
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Pinterest / SEO → ekaterina-donnat.com</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Форма «Время выдохнуть»</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Email с демо-треком через Resend</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Гостевой токен → плеер → предложение полного курса</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Pinterest / SEO → <span class="funnel-step-accent">ekaterina-donnat.com</span></span></div>
+          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Форма «Время выдохнуть» — мягкий захват без давления</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text">Email с демо-треком через <span class="funnel-step-accent">Resend</span></span></div>
+          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text"><span class="funnel-step-end">Гостевой токен → плеер → предложение полного курса</span></span></div>
         </div>
       </div>
-      <div class="funnel-card">
-        <div class="funnel-label">Путь 04</div>
-        <div class="funnel-title">Прямая покупка</div>
+
+      <div class="funnel-panel" id="f4">
+        <div class="funnel-panel-title">Прямая покупка</div>
         <div class="funnel-steps">
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Органика → ekaterina-donnat.com</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Аккордеон с продуктами</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Stripe Payment Link</span></div>
-          <div class="funnel-step"><span class="funnel-arrow">→</span><span class="funnel-text">Токен по email → закрытый плеер</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">1</div><span class="funnel-step-text">Органика → <span class="funnel-step-accent">ekaterina-donnat.com</span></span></div>
+          <div class="funnel-step"><div class="funnel-step-num">2</div><span class="funnel-step-text">Аккордеон с продуктами — матрица 25€–650€</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">3</div><span class="funnel-step-text"><span class="funnel-step-accent">Stripe Payment Link</span> — без промежуточных шагов</span></div>
+          <div class="funnel-step"><div class="funnel-step-num">4</div><span class="funnel-step-text"><span class="funnel-step-end">Токен по email → закрытый плеер</span></span></div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -457,6 +480,13 @@ body{
 </div>
 
 <script>
+function showFunnel(id, btn) {
+  document.querySelectorAll('.funnel-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.funnel-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
 var obs = new IntersectionObserver(function(entries){
   entries.forEach(function(e){
     if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
