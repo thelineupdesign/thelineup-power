@@ -380,6 +380,51 @@
     body.en span[data-ru] { display: none; }
     body:not(.en) span[data-en] { display: none; }
 
+    /* ─── ДЕКОР-СЁРФ (падающая доска) ─── */
+    .surf-decor {
+      position: fixed;
+      left: calc(50vw - 420px);
+      top: 0;
+      width: 30px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .surf-decor__board {
+      position: absolute;
+      top: 0;
+      width: 24px;
+      height: 80px;
+      animation: surfFall 4.5s ease-in infinite;
+      will-change: transform, opacity;
+    }
+    @keyframes surfFall {
+      0% {
+        transform: translateY(-100px) rotate(-10deg);
+        opacity: 0;
+        animation-timing-function: ease-in;
+      }
+      6% {
+        opacity: 0.55;
+      }
+      60% {
+        opacity: 0.55;
+      }
+      66.67% {
+        transform: translateY(110vh) rotate(60deg);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(110vh) rotate(60deg);
+        opacity: 0;
+      }
+    }
+    @media (max-width: 1200px) {
+      .surf-decor { display: none; }
+    }
+
     /* ─── АНИМАЦИИ ─── */
     @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
     @keyframes fadeUp  { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
@@ -411,6 +456,15 @@
   </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════════ ДЕКОР-СЁРФ ═══════════════════════════════ -->
+<div class="surf-decor" aria-hidden="true">
+  <svg class="surf-decor__board" viewBox="-12 -35 24 75" fill="#2C1F14" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+    <ellipse cx="0" cy="0" rx="10" ry="30"/>
+    <polygon points="-3,22 -11,34 -1,32"/>
+    <polygon points="3,22 11,34 1,32"/>
+  </svg>
+</div>
 
 <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
 <section class="hero-root">
@@ -561,8 +615,6 @@
             </div>
           </div>
         </div>
-
-
 
         <div class="case-card card-in" onclick="openCase('illume')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCase('illume')">
           <span class="tag tag-bali">Wellness · Bali</span>
