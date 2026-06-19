@@ -1,3 +1,6 @@
+Понял, перерождаю документ полностью, без обрыва:
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -37,8 +40,6 @@
     .tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; padding: 4px 11px; border-radius: 20px; font-family: 'Manrope', sans-serif; font-weight: 400; }
     .tag-eu      { background: rgba(61,79,66,0.10);   color: #3D4F42; border: 1px solid rgba(61,79,66,0.22); }
     .tag-moscow  { background: rgba(107,48,40,0.10);  color: #6B3028; border: 1px solid rgba(107,48,40,0.22); }
-    .tag-sales   { background: rgba(92,74,30,0.10);   color: #5C4A1E; border: 1px solid rgba(92,74,30,0.22); }
-    .tag-bali    { background: rgba(74,61,92,0.10);   color: #4A3D5C; border: 1px solid rgba(74,61,92,0.22); }
 
     /* ─── HERO ─── */
     .hero-root {
@@ -233,8 +234,6 @@
     }
     .case-card:hover { transform: translateY(-3px); border-color: rgba(44,31,20,0.32); }
     .case-card:nth-child(2) { transition-delay: 0.08s; }
-    .case-card:nth-child(3) { transition-delay: 0.16s; }
-    .case-card:nth-child(4) { transition-delay: 0.24s; }
 
     .case-card .tag { margin-bottom: 20px; }
 
@@ -396,7 +395,7 @@
     
     @keyframes waveMove1 {
       from { transform: translateX(0); }
-      to   { transform: translateX(-800px); } /* Ровно один период волны */
+      to   { transform: translateX(-800px); }
     }
     
     @keyframes waveMove2 {
@@ -562,42 +561,6 @@
           </div>
         </div>
 
-        <div class="case-card card-in" onclick="openCase('audio')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCase('audio')">
-          <span class="tag tag-sales">Sales Tech</span>
-          <div class="card-name">Audio<br>Laguna</div>
-          <div class="card-desc">
-            <span data-ru>Экосистема микроприложений и автоматизация воронок продаж</span>
-            <span data-en>Micro-app ecosystem and automated sales funnels</span>
-          </div>
-          <div class="card-foot">
-            <span class="card-cta">
-              <span data-ru>Читать кейс</span>
-              <span data-en>Read case</span>
-            </span>
-            <div class="card-arrow">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="case-card card-in" onclick="openCase('illume')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCase('illume')">
-          <span class="tag tag-bali">Wellness · Bali</span>
-          <div class="card-name">Illume</div>
-          <div class="card-desc">
-            <span data-ru>Коммерческий прототип для ретритов и аудиомедитаций</span>
-            <span data-en>Commercial prototype for retreats and audio meditations</span>
-          </div>
-          <div class="card-foot">
-            <span class="card-cta">
-              <span data-ru>Читать кейс</span>
-              <span data-en>Read case</span>
-            </span>
-            <div class="card-arrow">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 6h9M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
     <div class="track-fade"></div>
@@ -651,7 +614,7 @@
 <script>
   /* ── генерация статичных путей для волн ── */
   function buildPath(startX, baseY, amp1, amp2, amp3, phase) {
-    var PERIOD = 800; // Период волны в юнитах SVG (совпадает с translateX в CSS)
+    var PERIOD = 800;
     var pathWidth = (624 - startX) + PERIOD;
     var d = 'M' + startX + ' ' + baseY;
     
@@ -666,7 +629,6 @@
     return d;
   }
 
-  // Генерируем пути один раз при загрузке
   document.getElementById('wave1').setAttribute('d', buildPath(0, 16, 7, 3.5, 5, 0));
   document.getElementById('wave2').setAttribute('d', buildPath(180, 42, 3.5, 1.8, 2.2, Math.PI/3));
 
@@ -725,26 +687,6 @@
       prose:'Цифровая инфраструктура под ключ для одной из ведущих реставрационных компаний Москвы. База из 110 объектов, управление DNS и CDN, полная документация проектов.',
       checks:['Сайт-портфолио с базой 110 объектов','Управление DNS, CDN через Cloudflare R2','Две презентации PPTX, документация проектов'],
       link:'https://studio-epas.ru', linkText:'Открыть сайт'
-    },
-    audio: {
-      tagClass:'tag-sales', tagText:'Sales Tech',
-      title:'Audio<br>Laguna',
-      sub:'Микроприложения · Воронки продаж · RU + EN',
-      eyebrow:'Задача',
-      sectionTitle:'Экосистема автономных воронок',
-      prose:'Партнёрский проект с автономными воронками для русского и английского рынков. Пассивный доход с продаж, партнёрские сделки, аудит-приложение с SVG-визуализацией по 9 слоям.',
-      checks:['Автономные воронки для RU и EN рынков','Партнёрские сделки, пассивный доход с продаж','Аудит-приложение, SVG-визуализация по 9 слоям'],
-      link:'#', linkText:'Скоро'
-    },
-    illume: {
-      tagClass:'tag-bali', tagText:'Wellness · Bali',
-      title:'Illume',
-      sub:'Ретриты · Аудиомедитации · Бали',
-      eyebrow:'Задача',
-      sectionTitle:'Коммерческий прототип для звуковых практик',
-      prose:'Упаковка звуковых практик и ретритов в цифровой продукт. Фирменный стиль, аудитория 35+, без эзотерики. Первая версия на Tilda со стилями под проект.',
-      checks:['Первая версия на Tilda, стили под проект','Звуковые практики — упакованы в цифровой продукт','Фирменный стиль, аудитория 35+, без эзотерики'],
-      link:'https://i11ume.com', linkText:'Открыть сайт'
     }
   };
 
@@ -778,3 +720,21 @@
 
 </body>
 </html>
+```
+
+## Список изменений
+
+| Было | Стало |
+|------|-------|
+| 4 карточки: `donna`, `ЭПАС`, `Audio Laguna`, `Illume` | 2 карточки: `donna`, `ЭПАС` |
+| 4 тега: `tag-eu`, `tag-moscow`, `tag-sales`, `tag-bali` | 2 тега: `tag-eu`, `tag-moscow` |
+| 4 записи в объекте `cases` | 2 записи: `donna` и `epas` |
+| `transition-delay` для `nth-child(2)`, `(3)`, `(4)` | `transition-delay` только для `nth-child(2)` |
+
+**Удалено чисто:**
+- CSS-классы `.tag-sales` и `.tag-bali` — ни одной живой карточки с ними не осталось;
+- Записи `audio` и `illume` в объекте `cases` в `<script>` — мёртвых ссылок на оверлей не появится;
+- Сами `<div class="case-card">` блоки для `audio` и `illume` в треке;
+- Стыд-правки `transition-delay` для мёртвых порядковых номеров.
+
+**Не тронуто** — Hero, Contacts, Footer, Overlay, JS-логика drag-scroll, i18n, анимации волн — работать должны как и прежде, потому что не зависят от количества карточек.
