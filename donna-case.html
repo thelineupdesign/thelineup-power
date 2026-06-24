@@ -211,18 +211,9 @@ body{
 }
 .fchain-arrow{font-size:12px;color:var(--umbra);opacity:0.45}
 
-/* ── архитектура ── */
-.arch-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-@media(max-width:560px){.arch-grid{grid-template-columns:1fr}}
-
-.arch-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:4px;padding:20px;
-}
-.arch-card-title{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.arch-list{list-style:none;display:flex;flex-direction:column;gap:6px}
-.arch-list li{font-size:13px;color:#4A4038;font-weight:300;padding-left:14px;position:relative;line-height:1.5}
-.arch-list li::before{content:'–';position:absolute;left:0;color:var(--umbra);opacity:0.45}
+/* ── граф инфраструктуры ── */
+.infra-graph{margin-top:28px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.infra-graph svg{display:block;width:100%;min-width:514px}
 
 /* ── mood engine ── */
 .mood-card{
@@ -491,53 +482,76 @@ body{
     <h2 class="section-title">Инфраструктура</h2>
     <p class="prose">Три домена с разными задачами. Серверные функции на Netlify без отдельного сервера. Supabase как операционная база с RLS-изоляцией чувствительных таблиц.</p>
 
-    <div class="arch-grid">
-      <div class="arch-card">
-        <div class="arch-card-title">Хостинг и доставка</div>
-        <ul class="arch-list">
-          <li>Tilda — основной сайт RU/FR</li>
-          <li>Netlify Functions — 11 серверных функций</li>
-          <li>Cloudflare R2 — аудиофайлы CDN</li>
-          <li>GitHub CI/CD — автодеплой</li>
-        </ul>
-      </div>
-      <div class="arch-card">
-        <div class="arch-card-title">Данные и платежи</div>
-        <ul class="arch-list">
-          <li>Supabase — 5 таблиц, RLS на 2</li>
-          <li>Stripe — вебхук + Payment Links</li>
-          <li>Resend — транзакционные письма</li>
-          <li>FB Pixel — трекинг воронки</li>
-        </ul>
-      </div>
-      <div class="arch-card">
-        <div class="arch-card-title">Безопасность</div>
-        <ul class="arch-list">
-          <li>Токенизированный доступ к плееру</li>
-          <li>HMAC-аутентификация панели управления</li>
-          <li>CORS только на рабочих доменах</li>
-          <li>Секреты только в env variables</li>
-        </ul>
-      </div>
-      <div class="arch-card">
-        <div class="arch-card-title">Контент</div>
-        <ul class="arch-list">
-          <li>12 треков ступени 1 в R2</li>
-          <li>3 демо-трека, 5 дневников PDF</li>
-          <li>RU/FR интерфейс плеера</li>
-          <li>Прогресс прослушивания в Supabase</li>
-        </ul>
-      </div>
+    <div class="infra-graph">
+      <svg viewBox="0 0 514 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M1,1 L7,4 L1,7" stroke="rgba(30,36,32,0.38)" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+
+        <!-- метки слоёв -->
+        <text x="54" y="13" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" letter-spacing="0.16em" fill="#7A6E60" opacity="0.55">ИНТЕРФЕЙС</text>
+        <text x="240" y="13" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" letter-spacing="0.16em" fill="#2C1F14" opacity="0.5">ЯДРО</text>
+        <text x="441" y="13" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" letter-spacing="0.16em" fill="#7A6E60" opacity="0.55">СЕРВИСЫ</text>
+
+        <!-- пунктирные разделители -->
+        <line x1="139" y1="18" x2="139" y2="242" stroke="rgba(30,36,32,0.07)" stroke-width="1" stroke-dasharray="3,4"/>
+        <line x1="344" y1="18" x2="344" y2="242" stroke="rgba(30,36,32,0.07)" stroke-width="1" stroke-dasharray="3,4"/>
+
+        <!-- стрелки (рисуем до узлов, чтобы узлы были поверх) -->
+        <path d="M108,41 C139,41 150,68 170,68" stroke="rgba(30,36,32,0.18)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <path d="M108,109 L170,107" stroke="rgba(30,36,32,0.18)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <path d="M108,177 C139,177 150,144 170,144" stroke="rgba(30,36,32,0.18)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <path d="M310,80 C341,80 352,41 378,41" stroke="rgba(30,36,32,0.18)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <path d="M310,106 L378,105" stroke="rgba(30,36,32,0.18)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <path d="M310,130 C341,130 352,169 378,169" stroke="rgba(30,36,32,0.18)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <!-- Stripe → Resend -->
+        <path d="M441,186 L441,204" stroke="rgba(44,31,20,0.22)" stroke-width="0.9" stroke-linecap="round" marker-end="url(#arr)"/>
+        <text x="449" y="197" font-family="Manrope,sans-serif" font-size="8" fill="#7A6E60" opacity="0.65">токен на email</text>
+
+        <!-- ── слой 1: интерфейс ── -->
+        <rect x="0" y="24" width="108" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="54" y="38" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">demo.html</text>
+        <text x="54" y="51" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">демо-плеер</text>
+
+        <rect x="0" y="92" width="108" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="54" y="106" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">Tilda</text>
+        <text x="54" y="119" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">сайт RU · FR</text>
+
+        <rect x="0" y="160" width="108" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="54" y="174" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">player.html</text>
+        <text x="54" y="187" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">закрытый плеер</text>
+
+        <!-- ── слой 2: ядро — netlify functions ── -->
+        <rect x="170" y="52" width="140" height="108" rx="4" fill="rgba(44,31,20,0.05)" stroke="rgba(44,31,20,0.26)" stroke-width="0.8"/>
+        <text x="240" y="76" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" letter-spacing="0.14em" fill="#2C1F14" opacity="0.6">NETLIFY</text>
+        <text x="240" y="96" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="18" font-weight="300" font-style="italic" fill="#1A1814">Functions</text>
+        <text x="240" y="116" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">11 серверных функций</text>
+        <text x="240" y="132" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60" opacity="0.7">HMAC · RLS · CORS</text>
+        <text x="240" y="147" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60" opacity="0.7">GitHub CI/CD</text>
+
+        <!-- ── слой 3: сервисы ── -->
+        <rect x="378" y="24" width="126" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="441" y="38" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">Cloudflare R2</text>
+        <text x="441" y="51" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">аудиофайлы CDN</text>
+
+        <rect x="378" y="88" width="126" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="441" y="102" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">Supabase</text>
+        <text x="441" y="115" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">5 таблиц · RLS на 2</text>
+
+        <rect x="378" y="152" width="126" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="441" y="166" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">Stripe</text>
+        <text x="441" y="179" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">вебхук · Payment Links</text>
+
+        <rect x="378" y="204" width="126" height="34" rx="3" fill="#CCC0A8" stroke="rgba(30,36,32,0.18)" stroke-width="0.8"/>
+        <text x="441" y="218" text-anchor="middle" font-family="Manrope,sans-serif" font-size="11" font-weight="400" fill="#1A1814">Resend</text>
+        <text x="441" y="231" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" fill="#7A6E60">транзакционные письма</text>
+      </svg>
     </div>
 
-    <div class="chips">
-      <span class="chip chip-hi">Netlify Functions</span>
-      <span class="chip chip-hi">Supabase</span>
-      <span class="chip chip-hi">Stripe</span>
-      <span class="chip chip-hi">Cloudflare R2</span>
-      <span class="chip">Tilda</span>
-      <span class="chip">Resend</span>
-      <span class="chip">FB Pixel</span>
+    <div class="chips" style="margin-top:16px">
+      <span class="chip">FB Pixel · трекинг</span>
       <span class="chip">RLS PostgreSQL</span>
       <span class="chip">HMAC tokens</span>
     </div>
